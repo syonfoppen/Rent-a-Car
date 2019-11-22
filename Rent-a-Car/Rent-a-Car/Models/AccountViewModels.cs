@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
 namespace Rent_a_Car.Models
@@ -33,7 +34,7 @@ namespace Rent_a_Car.Models
         public string Code { get; set; }
         public string ReturnUrl { get; set; }
 
-        [Display(Name = "Remember this browser?")]
+        [Display(Name = "Onthoud deze browser.")]
         public bool RememberBrowser { get; set; }
 
         public bool RememberMe { get; set; }
@@ -55,10 +56,10 @@ namespace Rent_a_Car.Models
 
         [Required]
         [DataType(DataType.Password)]
-        [Display(Name = "Password")]
+        [Display(Name = "Wachtwoord")]
         public string Password { get; set; }
 
-        [Display(Name = "Remember me?")]
+        [Display(Name = "Onthoud dit account op deze computer.")]
         public bool RememberMe { get; set; }
     }
 
@@ -70,15 +71,67 @@ namespace Rent_a_Car.Models
         public string Email { get; set; }
 
         [Required]
-        [StringLength(100, ErrorMessage = "The {0} must be at least {2} characters long.", MinimumLength = 6)]
+        [StringLength(100, ErrorMessage = "Het {0} moet ten minste {2} karakters lang zijn.", MinimumLength = 6)]
         [DataType(DataType.Password)]
-        [Display(Name = "Password")]
+        [Display(Name = "Wachtwoord")]
         public string Password { get; set; }
 
         [DataType(DataType.Password)]
-        [Display(Name = "Confirm password")]
-        [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
+        [Display(Name = "Bevestigings wachtwoord")]
+        [Compare("Wachtwoord", ErrorMessage = "Het wachtwoord en bevestigings wachtwoord komen niet overeen.")]
         public string ConfirmPassword { get; set; }
+
+
+        //persoonlijke data
+        [Required]
+        [Display(Name = "Voornaam")]
+        public string Voornaam { get; set; }
+
+        [Required]
+        [Display(Name = "Tussenvoegsel")]
+        public string Tussenvoegsel { get; set; }
+
+        [Required]
+        [Display(Name = "Achternaam")]
+        public string Achternaam { get; set; }
+
+        [Required]
+        [Display(Name = "Geboortedatum")]
+        public DateTime Geboortedatum { get; set; }
+
+        [Display(Name = "Telefoonnummer")]
+        [Phone]
+        public string PhoneNumber { get; set; }
+
+
+        //Adres
+        [Required]
+        [Display(Name = "Adres")]
+        public string Adres { get; set; }
+
+        [Required]
+        [Display(Name = "Huis nummer")]
+        public int Huisnummer { get; set; }
+
+        [Required]
+        [Display(Name = "Toevoeging")]
+        public string Toevoeging { get; set; }
+
+        [Required]
+        [Display(Name = "Postcode")]
+        public string PostCode { get; set; }
+
+        [Required]
+        [Display(Name = "Plaats")]
+        public string Plaats { get; set; }
+
+        [Required]
+        [Display(Name = "Provincie")]
+        public string Provincie { get; set; }
+
+        [Required]
+        [Display(Name = "Land")]
+        public string Land { get; set; }
     }
 
     public class ResetPasswordViewModel
@@ -89,14 +142,14 @@ namespace Rent_a_Car.Models
         public string Email { get; set; }
 
         [Required]
-        [StringLength(100, ErrorMessage = "The {0} must be at least {2} characters long.", MinimumLength = 6)]
+        [StringLength(100, ErrorMessage = "Het {0} moet ten minste {2} karakters lang zijn.", MinimumLength = 6)]
         [DataType(DataType.Password)]
-        [Display(Name = "Password")]
+        [Display(Name = "Wachtwoord")]
         public string Password { get; set; }
 
         [DataType(DataType.Password)]
-        [Display(Name = "Confirm password")]
-        [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
+        [Display(Name = "Bevestigings wachtwoord")]
+        [Compare("Wachtwoord", ErrorMessage = "Het wachtwoord en bevestigings wachtwoord komen niet overeen.")]
         public string ConfirmPassword { get; set; }
 
         public string Code { get; set; }
