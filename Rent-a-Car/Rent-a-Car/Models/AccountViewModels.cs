@@ -78,7 +78,7 @@ namespace Rent_a_Car.Models
 
         [DataType(DataType.Password)]
         [Display(Name = "Bevestigings wachtwoord")]
-        [Compare("Wachtwoord", ErrorMessage = "Het wachtwoord en bevestigings wachtwoord komen niet overeen.")]
+        [Compare("Password", ErrorMessage = "Het wachtwoord en bevestigings wachtwoord komen niet overeen.")]
         public string ConfirmPassword { get; set; }
 
 
@@ -97,6 +97,7 @@ namespace Rent_a_Car.Models
 
         [Required]
         [Display(Name = "Geboortedatum")]
+        [DataType(DataType.Date)]
         public DateTime Geboortedatum { get; set; }
 
         [Display(Name = "Telefoonnummer")]
@@ -106,8 +107,8 @@ namespace Rent_a_Car.Models
 
         //Adres
         [Required]
-        [Display(Name = "Adres")]
-        public string Adres { get; set; }
+        [Display(Name = "Straat")]
+        public string Straat { get; set; }
 
         [Required]
         [Display(Name = "Huis nummer")]
@@ -149,7 +150,7 @@ namespace Rent_a_Car.Models
 
         [DataType(DataType.Password)]
         [Display(Name = "Bevestigings wachtwoord")]
-        [Compare("Wachtwoord", ErrorMessage = "Het wachtwoord en bevestigings wachtwoord komen niet overeen.")]
+        [Compare("Password", ErrorMessage = "Het wachtwoord en bevestigings wachtwoord komen niet overeen.")]
         public string ConfirmPassword { get; set; }
 
         public string Code { get; set; }

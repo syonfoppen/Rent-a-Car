@@ -151,7 +151,10 @@ namespace Rent_a_Car.Controllers
         {
             if (ModelState.IsValid)
             {
-                var user = new ApplicationUser { UserName = model.Email, Email = model.Email };
+                var user = new ApplicationUser { UserName = model.Email, Email = model.Email, Achternaam = model.Achternaam, Straat = model.Straat, 
+                    Geboortedatum = model.Geboortedatum, Huisnummer = model.Huisnummer, Land = model.Land, PhoneNumber = model.PhoneNumber, 
+                    Plaats = model.Plaats, PostCode = model.PostCode, Provincie = model.Provincie, Toevoeging = model.Toevoeging, 
+                    Tussenvoegsel = model.Tussenvoegsel, Voornaam = model.Voornaam };
                 var result = await UserManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {

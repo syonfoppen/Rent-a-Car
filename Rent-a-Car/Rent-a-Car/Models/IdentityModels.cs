@@ -18,7 +18,7 @@ namespace Rent_a_Car.Models
 
 
         //Adres
-        public string Adres { get; set; }
+        public string Straat { get; set; }
         public int Huisnummer { get; set; }
         public string Toevoeging { get; set; }
         public string PostCode { get; set; }
