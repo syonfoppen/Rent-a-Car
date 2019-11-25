@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012.Azure" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012.Azure" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Auto">
           <Key>
             <PropertyRef Name="AutoID" />
@@ -48,6 +48,15 @@
           </Key>
           <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="BrandstofType" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="BTW">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="BTW" Type="float" Nullable="false" />
+          <Property Name="StartDatum" Type="datetime2" Precision="7" Nullable="false" />
+          <Property Name="EindDatum" Type="datetime2" Precision="7" />
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
         </EntityType>
         <EntityType Name="SchakelType">
           <Key>
@@ -153,6 +162,7 @@
           <EntitySet Name="AutoPrijs" EntityType="Self.AutoPrijs" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="AutoType" EntityType="Self.AutoType" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Brandstof" EntityType="Self.Brandstof" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="BTW" EntityType="Self.BTW" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="SchakelType" EntityType="Self.SchakelType" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Verhuring" EntityType="Self.Verhuring" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="VerhuringAutos" EntityType="Self.VerhuringAutos" Schema="dbo" store:Type="Tables" />
@@ -181,8 +191,7 @@
             <End Role="VerhuringAutos" EntitySet="VerhuringAutos" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -338,7 +347,19 @@
             <End Role="Auto" EntitySet="Auto" />
             <End Role="Verhuring" EntitySet="Verhuring" />
           </AssociationSet>
+          <EntitySet Name="BTW" EntityType="Model.BTW" />
         </EntityContainer>
+        <EntityType Name="BTW">
+          <Key>
+            <PropertyRef Name="BTW1" />
+            <PropertyRef Name="StartDatum" />
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="BTW1" Type="Double" Nullable="false" />
+          <Property Name="StartDatum" Type="DateTime" Nullable="false" Precision="7" />
+          <Property Name="EindDatum" Type="DateTime" Precision="7" />
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -421,6 +442,16 @@
               <ScalarProperty Name="ID" ColumnName="VerhuringID" />
             </EndProperty>
           </AssociationSetMapping>
+          <EntitySetMapping Name="BTW">
+            <EntityTypeMapping TypeName="Model.BTW">
+              <MappingFragment StoreEntitySet="BTW">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="EindDatum" ColumnName="EindDatum" />
+                <ScalarProperty Name="StartDatum" ColumnName="StartDatum" />
+                <ScalarProperty Name="BTW1" ColumnName="BTW" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

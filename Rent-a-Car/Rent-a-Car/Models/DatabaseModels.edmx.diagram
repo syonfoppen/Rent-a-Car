@@ -16,6 +16,7 @@
         <AssociationConnector Association="Model.FK_AutoType_Brandstof" ManuallyRouted="false" />
         <AssociationConnector Association="Model.FK_AutoType_SchakelType" ManuallyRouted="false" />
         <AssociationConnector Association="Model.VerhuringAutos" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="Model.BTW" Width="1.5" PointX="1.125" PointY="7.25" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
