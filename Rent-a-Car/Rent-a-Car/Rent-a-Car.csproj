@@ -177,6 +177,7 @@
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Classes\Mailer.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\AutosController.cs" />
     <Compile Include="Controllers\AutoTypesController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
@@ -350,6 +351,11 @@
     <Content Include="Views\AutoTypes\Details.cshtml" />
     <Content Include="Views\AutoTypes\Edit.cshtml" />
     <Content Include="Views\AutoTypes\Index.cshtml" />
+    <Content Include="Views\Autos\Create.cshtml" />
+    <Content Include="Views\Autos\Delete.cshtml" />
+    <Content Include="Views\Autos\Details.cshtml" />
+    <Content Include="Views\Autos\Edit.cshtml" />
+    <Content Include="Views\Autos\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
