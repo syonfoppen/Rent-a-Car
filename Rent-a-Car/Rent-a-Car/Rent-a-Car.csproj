@@ -175,7 +175,9 @@
     <Compile Include="App_Start\IdentityConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
+    <Compile Include="Classes\Mailer.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\AutoTypesController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Global.asax.cs">
@@ -197,6 +199,9 @@
       <DependentUpon>DatabaseModels.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Brandstof.cs">
+      <DependentUpon>DatabaseModels.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\BTW.cs">
       <DependentUpon>DatabaseModels.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\DatabaseModels.Context.cs">
@@ -340,6 +345,11 @@
     <Content Include="Scripts\popper.js.map" />
     <Content Include="Scripts\popper-utils.min.js.map" />
     <Content Include="Scripts\popper-utils.js.map" />
+    <Content Include="Views\AutoTypes\Create.cshtml" />
+    <Content Include="Views\AutoTypes\Delete.cshtml" />
+    <Content Include="Views\AutoTypes\Details.cshtml" />
+    <Content Include="Views\AutoTypes\Edit.cshtml" />
+    <Content Include="Views\AutoTypes\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
