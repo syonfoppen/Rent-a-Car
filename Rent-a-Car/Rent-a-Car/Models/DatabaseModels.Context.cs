@@ -31,5 +31,6 @@ namespace Rent_a_Car.Models
         public virtual DbSet<Brandstof> Brandstof { get; set; }
         public virtual DbSet<SchakelType> SchakelType { get; set; }
         public virtual DbSet<Verhuring> Verhuring { get; set; }
+        public virtual DbSet<BTW> BTW { get; set; }
     }
 }
