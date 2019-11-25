@@ -11,6 +11,7 @@ using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin;
 using Microsoft.Owin.Security;
 using Rent_a_Car.Models;
+using Rent_a_Car.Classes;
 
 namespace Rent_a_Car
 {
@@ -18,7 +19,16 @@ namespace Rent_a_Car
     {
         public Task SendAsync(IdentityMessage message)
         {
-            // Plug in your email service here to send an email.
+            //email settings
+            Mailer.GmailUsername = "bitskill.projects@gmail.com";
+            Mailer.GmailPassword = "Henk123#";
+
+            Mailer mailer = new Mailer();
+            mailer.ToEmail = message.Destination;
+            mailer.Subject = message.Subject;
+            mailer.Body = message.Body;
+            mailer.IsHtml = true;
+            mailer.Send();
             return Task.FromResult(0);
         }
     }

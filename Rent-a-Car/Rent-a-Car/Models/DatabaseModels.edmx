@@ -351,8 +351,6 @@
         </EntityContainer>
         <EntityType Name="BTW">
           <Key>
-            <PropertyRef Name="BTW1" />
-            <PropertyRef Name="StartDatum" />
             <PropertyRef Name="ID" />
           </Key>
           <Property Name="BTW1" Type="Double" Nullable="false" />
