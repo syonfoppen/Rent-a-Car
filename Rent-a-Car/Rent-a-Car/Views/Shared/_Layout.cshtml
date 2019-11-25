@@ -21,7 +21,7 @@
     @*Navbar*@
     <nav class="navbar navbar-light navbar-expand-lg fixed-top bg-secondary text-uppercase" id="mainNav" style="background-color: rgb(0,39,78) !important;">
         <div class="container">
-            <a class="navbar-brand js-scroll-trigger" href="#page-top">rent-a-car</a><button data-toggle="collapse" data-target="#navbarResponsive" class="navbar-toggler navbar-toggler-right text-uppercase bg-primary text-white rounded" aria-controls="navbarResponsive"aria-expanded="false" aria-label="Toggle navigation">
+            <a class="navbar-brand js-scroll-trigger" href="#page-top">rent-a-car</a><button data-toggle="collapse" data-target="#navbarResponsive" class="navbar-toggler navbar-toggler-right text-uppercase bg-primary text-white rounded" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
                 <i class="fa fa-bars"></i>
             </button>
             <div class="collapse navbar-collapse" id="navbarResponsive">
@@ -33,13 +33,16 @@
             </div>
         </div>
     </nav>
-   
+
+    @*Body*@
     <div class="container body-content">
         @RenderBody()
     </div>
-    <footer class="bg-dark fixed-bottom">
-        <p class="text-light">Rent-a-Car &copy; @DateTime.Now.Year</p>
-    </footer>
+
+    @*Footer*@
+    <div class="copyright py-4 text-center text-white" style="background-color: rgb(0,39,78) !important;">
+        <div class="container"><small>Copyright ©&nbsp;Rent a Car @DateTime.Now.Year</small></div>
+    </div>
 
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
