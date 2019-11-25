@@ -35,13 +35,13 @@
     </nav>
 
     @*Body*@
-    <div class="container body-content">
+    <div id="page-top">
         @RenderBody()
     </div>
 
     @*Footer*@
     <div class="copyright py-4 text-center text-white" style="background-color: rgb(0,39,78) !important;">
-        <div class="container"><small>Copyright ©&nbsp;Rent a Car @DateTime.Now.Year</small></div>
+        <div class=""><small>Copyright ©&nbsp;Rent a Car @DateTime.Now.Year</small></div>
     </div>
 
     @Scripts.Render("~/bundles/jquery")
