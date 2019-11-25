@@ -5,18 +5,18 @@
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
       <Diagram DiagramId="b3aab465bbc54ae3abf1b03a8452cc11" Name="Diagram1">
-        <EntityTypeShape EntityType="Model.Auto" Width="1.5" PointX="5.25" PointY="2" IsExpanded="true" />
-        <EntityTypeShape EntityType="Model.AutoPrijs" Width="1.5" PointX="5.25" PointY="5.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="Model.AutoType" Width="1.5" PointX="3" PointY="2.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="Model.Brandstof" Width="1.5" PointX="0.75" PointY="3.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="Model.SchakelType" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="Model.Verhuring" Width="1.5" PointX="7.5" PointY="1.875" IsExpanded="true" />
-        <AssociationConnector Association="Model.FK_Auto_AutoType" ManuallyRouted="false" />
-        <AssociationConnector Association="Model.FK_AutoPrijs_AutoType" ManuallyRouted="false" />
-        <AssociationConnector Association="Model.FK_AutoType_Brandstof" ManuallyRouted="false" />
-        <AssociationConnector Association="Model.FK_AutoType_SchakelType" ManuallyRouted="false" />
-        <AssociationConnector Association="Model.VerhuringAutos" ManuallyRouted="false" />
-        <EntityTypeShape EntityType="Model.BTW" Width="1.5" PointX="0.75" PointY="7.75" />
+        <EntityTypeShape EntityType="Model.Auto" Width="1.5" PointX="5.25" PointY="4.75" />
+        <EntityTypeShape EntityType="Model.AutoPrijs" Width="1.5" PointX="5.25" PointY="1.875" />
+        <EntityTypeShape EntityType="Model.AutoType" Width="1.5" PointX="3" PointY="2.5" />
+        <EntityTypeShape EntityType="Model.Brandstof" Width="1.5" PointX="0.75" PointY="3.75" />
+        <EntityTypeShape EntityType="Model.BTW" Width="1.5" PointX="0.75" PointY="7.625" />
+        <EntityTypeShape EntityType="Model.SchakelType" Width="1.5" PointX="0.75" PointY="0.75" />
+        <EntityTypeShape EntityType="Model.Verhuring" Width="1.5" PointX="7.5" PointY="4.625" />
+        <AssociationConnector Association="Model.FK_Auto_AutoType" />
+        <AssociationConnector Association="Model.FK_AutoPrijs_AutoType" />
+        <AssociationConnector Association="Model.FK_AutoType_Brandstof" />
+        <AssociationConnector Association="Model.FK_AutoType_SchakelType" />
+        <AssociationConnector Association="Model.VerhuringAutos" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
