@@ -1,37 +1,48 @@
-﻿@model IEnumerable<Rent_a_Car.Models.Auto>
+﻿@model IEnumerable<Rent_a_Car.Models.AutoType>
 @{
     ViewBag.Title = "Index";
 }
+    <link href="~/Content/RentCars.css" rel="stylesheet" />
 
-<h2>Index</h2>
-<div class="container" style="display:grid;grid-template-columns: 33% 33% 33%;">
-    @{
 
-        foreach (var auto in Model)
-        {
-
-        <div class="card" style="margin: 10px;">
+    <div class="container">
+        <h2>Index</h2>
+        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum vitae augue viverra, pellentesque eros eget, luctus lacus. Etiam sit amet ipsum et dolor suscipit pulvinar et id justo. Phasellus quis consectetur ligula. Cras commodo nibh orci, vel ultrices ex pharetra nec. Vivamus metus purus, varius nec orci sagittis, aliquet eleifend sapien. Etiam eu sapien eget erat tincidunt lobortis. Praesent eleifend tristique tortor vel rutrum. Mauris ut fringilla ligula. Sed posuere enim sit amet ligula sollicitudin, vel aliquet libero ultrices. Cras non facilisis arcu, nec mattis magna. Morbi vitae lorem vestibulum, sagittis libero quis, fringilla massa. Nullam a feugiat nisl, eget faucibus ex. Mauris a semper quam.</p>
+        <div class="row">
             @{
-                if (auto.AutoType.Foto != null && auto.AutoType.Foto.Length > 0)
+                foreach (var autotype in Model)
                 {
 
-                    var base64 = Convert.ToBase64String(auto.AutoType.Foto);
-                    var imgSrc = String.Format("data:image;base64,{0}", base64);
+                    <div class="col-md-6 col-lg-4">
+                        <div class="card" style="margin: 10px;">
+                            @{
+                                if (autotype.Foto != null && autotype.Foto.Length > 0)
+                                {
 
-                    <img src="@imgSrc" class="card-img-top" style="width: 100%; height: 150px;"/>
-                }
-                else
-                {
-                  <img src="~/Content/Placeholder_car.jpg" class="card-img-top" style="width: 100%; height: 150px;"/>
-                }
+                                    var base64 = Convert.ToBase64String(autotype.Foto);
+                                    var imgSrc = String.Format("data:image;base64,{0}", base64);
 
+                                    <img src="@imgSrc" class="card-img-top" style="width: 100%; height: 150px;" />
+                                }
+                                else
+                                {
+                                    <img src="~/Content/Placeholder_car.jpg" class="card-img-top" style="width: 100%; height: 150px;" />
+                                }
+
+                            }
+                            <div class="card-body">
+                                <b>@autotype.Merk @autotype.Type - @autotype.Uitvoering</b><br />
+                                Laadruimte: @autotype.LaadRuimte L  <br />
+                                Aantal Deuren: @autotype.AantalDeuren
+
+                            </div>
+                        </div>
+                    </div>
+
+
+
+
+                }
             }
-            <div class="card-body">
-                <h2>@auto.AutoType.Merk @auto.AutoType.Type - @auto.AutoType.Uitvoering</h2>
-            </div>
         </div>
-
-
-        }
-    }
-</div>
+    </div>
