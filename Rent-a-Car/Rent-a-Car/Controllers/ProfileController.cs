@@ -61,18 +61,25 @@ namespace Rent_a_Car.Controllers
 
             if (!UserManager.Update(changedUser).Succeeded)
             {
-                return RedirectToAction("Index", new { message = "Failed to change your information.", messageColor = "danger" });
+                return RedirectToAction("Index", new { message = "Het bewerken van uw gegevens is mislukt.", messageColor = "danger" });
             }
             
-            if (registerView.ProfileNewPassword != null)
+            if (registerView.ProfileNewPassword != null && registerView.ProfileCurrentPassword != null)
             {
-                if (!UserManager.ChangePassword(changedUser.Id, registerView.ProfileCurrentPassword, registerView.ProfileNewPassword).Succeeded)
+                if (UserManager.CheckPassword(changedUser, registerView.ProfileCurrentPassword))
                 {
-                    return RedirectToAction("Index", new { message = "Failed to change your password.", messageColor = "danger" });
+                    if (!UserManager.ChangePassword(changedUser.Id, registerView.ProfileCurrentPassword, registerView.ProfileNewPassword).Succeeded)
+                    {
+                        return RedirectToAction("Index", new { message = "Het bewerken van uw wachtwoord is mislukt.", messageColor = "danger" });
+                    }
+                }
+                else
+                {
+                    return RedirectToAction("Index", new { message = "Het gegeven 'huidig wachtwoord' komt niet overeen met uw wachtwoord.", messageColor = "danger" });
                 }
             }
 
-            return RedirectToAction("Index", new { message = "Succesfully changed your information.", messageColor = "success" });
+            return RedirectToAction("Index", new { message = "Het bewerken van uw gegevens is gelukt.", messageColor = "success" });
         }
     }
 }
