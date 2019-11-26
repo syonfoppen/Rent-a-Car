@@ -17,6 +17,12 @@
     <link href="@Url.Content("~/assets/css/Login-Form-Dark.css")" rel="stylesheet" type="text/css" />
     <link href="@Url.Content("~/assets/bootstrap/css/bootstrap.min.css")" rel="stylesheet" type="text/css" />
 </head>
+
+<style>
+    body{
+        background-color: #283655;
+    }
+</style>
 @using (Html.BeginForm("Register", "Account", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
 {
 
