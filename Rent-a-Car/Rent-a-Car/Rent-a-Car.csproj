@@ -231,9 +231,12 @@
     <Compile Include="Startup.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="assets\css\all.css" />
     <Content Include="assets\bootstrap\css\bootstrap.min.css" />
-    <Content Include="assets\css\-Login-form-Page-BS4-.css" />
+    <Content Include="assets\css\Login-Form-Dark.css" />
     <Content Include="assets\img\3-cars.png" />
+    <Content Include="assets\img\login_background.png" />
+    <Content Include="assets\js\all.js" />
     <Content Include="assets\js\freelancer.js" />
     <Content Include="Content\bootstrap-grid.css" />
     <Content Include="Content\bootstrap-grid.min.css" />
