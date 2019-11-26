@@ -1,0 +1,41 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+
+}
+
+
+
+<div class="container" style="margin-top: 100px;">
+    <h2>Winkel Wagen</h2>
+    <hr />
+    @{
+        if (Session["ShoppingCard"] != null)
+        {
+            List<Rent_a_Car.Models.AutoType> autoTypeslist = (List<Rent_a_Car.Models.AutoType>)Session["ShoppingCard"];
+
+            foreach (var autotype in autoTypeslist)
+            {
+                <div class="card" style="margin-bottom: 50px">
+                        <div class="card-body">
+                            @{
+                                if (autotype.Foto != null && autotype.Foto.Length > 0)
+                                {
+
+                                    var base64 = Convert.ToBase64String(autotype.Foto);
+                                    var imgSrc = String.Format("data:image;base64,{0}", base64);
+
+                                    <img src="@imgSrc" class="card-img-top" style="width:150px; height: 150px; float:left;" />
+                                }
+                                else
+                                {
+                                    <img src="~/Content/Placeholder_car.jpg" class="card-img-top" style="width: 150px; height: 150px; float:left" />
+                                }
+                            }
+                        <h1 style="text-align: right">@autotype.Merk @autotype.Type - @autotype.Uitvoering</h1>
+                        </div>
+                </div>
+            }
+        }
+    }
+</div>

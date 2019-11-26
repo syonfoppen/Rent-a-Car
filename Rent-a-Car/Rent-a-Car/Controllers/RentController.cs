@@ -20,5 +20,7 @@ namespace Rent_a_Car.Controllers
             var autoTypes = db.AutoType;
             return View(autoTypes.ToList());
         }
+
+
     }
 }
