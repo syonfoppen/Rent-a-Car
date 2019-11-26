@@ -23,7 +23,7 @@ namespace Rent_a_Car.Models
         public int AutoID { get; set; }
         public int AutoTypeID { get; set; }
         public string Kenteken { get; set; }
-        public System.DateTime BouwJaar { get; set; }
+        public int BouwJaar { get; set; }
         public bool Beschikbaar { get; set; }
     
         public virtual AutoType AutoType { get; set; }

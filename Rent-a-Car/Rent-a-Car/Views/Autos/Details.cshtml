@@ -1,0 +1,50 @@
+﻿@model Rent_a_Car.Models.Auto
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Auto</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Kenteken)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Kenteken)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.BouwJaar)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.BouwJaar)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Beschikbaar)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Beschikbaar)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.AutoType.Merk)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.AutoType.Merk)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.AutoID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

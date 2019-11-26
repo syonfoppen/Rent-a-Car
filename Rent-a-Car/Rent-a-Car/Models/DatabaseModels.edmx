@@ -12,7 +12,7 @@
           <Property Name="AutoID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="AutoTypeID" Type="int" Nullable="false" />
           <Property Name="Kenteken" Type="nvarchar" MaxLength="25" Nullable="false" />
-          <Property Name="BouwJaar" Type="datetime2" Precision="7" Nullable="false" />
+          <Property Name="BouwJaar" Type="int" Nullable="false" />
           <Property Name="Beschikbaar" Type="bit" Nullable="false" />
         </EntityType>
         <EntityType Name="AutoPrijs">
@@ -195,17 +195,46 @@
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="Entities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Auto" EntityType="Model.Auto" />
+          <EntitySet Name="AutoPrijs" EntityType="Model.AutoPrijs" />
+          <EntitySet Name="AutoType" EntityType="Model.AutoType" />
+          <EntitySet Name="Brandstof" EntityType="Model.Brandstof" />
+          <EntitySet Name="BTW" EntityType="Model.BTW" />
+          <EntitySet Name="SchakelType" EntityType="Model.SchakelType" />
+          <EntitySet Name="Verhuring" EntityType="Model.Verhuring" />
+          <AssociationSet Name="FK_Auto_AutoType" Association="Model.FK_Auto_AutoType">
+            <End Role="AutoType" EntitySet="AutoType" />
+            <End Role="Auto" EntitySet="Auto" />
+          </AssociationSet>
+          <AssociationSet Name="FK_AutoPrijs_AutoType" Association="Model.FK_AutoPrijs_AutoType">
+            <End Role="AutoType" EntitySet="AutoType" />
+            <End Role="AutoPrijs" EntitySet="AutoPrijs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_AutoType_Brandstof" Association="Model.FK_AutoType_Brandstof">
+            <End Role="Brandstof" EntitySet="Brandstof" />
+            <End Role="AutoType" EntitySet="AutoType" />
+          </AssociationSet>
+          <AssociationSet Name="FK_AutoType_SchakelType" Association="Model.FK_AutoType_SchakelType">
+            <End Role="SchakelType" EntitySet="SchakelType" />
+            <End Role="AutoType" EntitySet="AutoType" />
+          </AssociationSet>
+          <AssociationSet Name="VerhuringAutos" Association="Model.VerhuringAutos">
+            <End Role="Auto" EntitySet="Auto" />
+            <End Role="Verhuring" EntitySet="Verhuring" />
+          </AssociationSet>
+        </EntityContainer>
         <EntityType Name="Auto">
           <Key>
             <PropertyRef Name="AutoID" />
           </Key>
           <Property Name="AutoID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="AutoTypeID" Type="Int32" Nullable="false" />
-          <Property Name="Kenteken" Type="String" MaxLength="25" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="BouwJaar" Type="DateTime" Nullable="false" Precision="7" />
+          <Property Name="Kenteken" Type="String" Nullable="false" MaxLength="25" FixedLength="false" Unicode="true" />
+          <Property Name="BouwJaar" Type="Int32" Nullable="false" />
           <Property Name="Beschikbaar" Type="Boolean" Nullable="false" />
-          <NavigationProperty Name="AutoType" Relationship="Self.FK_Auto_AutoType" FromRole="Auto" ToRole="AutoType" />
-          <NavigationProperty Name="Verhuring" Relationship="Self.VerhuringAutos" FromRole="Auto" ToRole="Verhuring" />
+          <NavigationProperty Name="AutoType" Relationship="Model.FK_Auto_AutoType" FromRole="Auto" ToRole="AutoType" />
+          <NavigationProperty Name="Verhuring" Relationship="Model.VerhuringAutos" FromRole="Auto" ToRole="Verhuring" />
         </EntityType>
         <EntityType Name="AutoPrijs">
           <Key>
@@ -214,17 +243,17 @@
           </Key>
           <Property Name="StartDatum" Type="DateTime" Nullable="false" Precision="7" />
           <Property Name="EindDatum" Type="DateTime" Precision="7" />
-          <Property Name="Prijs" Type="Decimal" Precision="19" Scale="4" Nullable="false" />
+          <Property Name="Prijs" Type="Decimal" Nullable="false" Precision="19" Scale="4" />
           <Property Name="AutoTypeID" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="AutoType" Relationship="Self.FK_AutoPrijs_AutoType" FromRole="AutoPrijs" ToRole="AutoType" />
+          <NavigationProperty Name="AutoType" Relationship="Model.FK_AutoPrijs_AutoType" FromRole="AutoPrijs" ToRole="AutoType" />
         </EntityType>
         <EntityType Name="AutoType">
           <Key>
             <PropertyRef Name="ID" />
           </Key>
           <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Merk" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="Type" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Merk" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Type" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="LaadRuimte" Type="Int32" Nullable="false" />
           <Property Name="SchakelTypeID" Type="Int32" Nullable="false" />
           <Property Name="Trekhaak" Type="Boolean" Nullable="false" />
@@ -232,28 +261,37 @@
           <Property Name="BrandstofID" Type="Int32" Nullable="false" />
           <Property Name="Gewicht" Type="Int32" Nullable="false" />
           <Property Name="AantalDeuren" Type="Int32" Nullable="false" />
-          <Property Name="Uitvoering" Type="String" MaxLength="25" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Uitvoering" Type="String" Nullable="false" MaxLength="25" FixedLength="false" Unicode="true" />
           <Property Name="Beschikbaar" Type="Boolean" Nullable="false" />
-          <NavigationProperty Name="Auto" Relationship="Self.FK_Auto_AutoType" FromRole="AutoType" ToRole="Auto" />
-          <NavigationProperty Name="AutoPrijs" Relationship="Self.FK_AutoPrijs_AutoType" FromRole="AutoType" ToRole="AutoPrijs" />
-          <NavigationProperty Name="Brandstof" Relationship="Self.FK_AutoType_Brandstof" FromRole="AutoType" ToRole="Brandstof" />
-          <NavigationProperty Name="SchakelType" Relationship="Self.FK_AutoType_SchakelType" FromRole="AutoType" ToRole="SchakelType" />
+          <NavigationProperty Name="Auto" Relationship="Model.FK_Auto_AutoType" FromRole="AutoType" ToRole="Auto" />
+          <NavigationProperty Name="AutoPrijs" Relationship="Model.FK_AutoPrijs_AutoType" FromRole="AutoType" ToRole="AutoPrijs" />
+          <NavigationProperty Name="Brandstof" Relationship="Model.FK_AutoType_Brandstof" FromRole="AutoType" ToRole="Brandstof" />
+          <NavigationProperty Name="SchakelType" Relationship="Model.FK_AutoType_SchakelType" FromRole="AutoType" ToRole="SchakelType" />
         </EntityType>
         <EntityType Name="Brandstof">
           <Key>
             <PropertyRef Name="ID" />
           </Key>
           <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="BrandstofType" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-          <NavigationProperty Name="AutoType" Relationship="Self.FK_AutoType_Brandstof" FromRole="Brandstof" ToRole="AutoType" />
+          <Property Name="BrandstofType" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="AutoType" Relationship="Model.FK_AutoType_Brandstof" FromRole="Brandstof" ToRole="AutoType" />
+        </EntityType>
+        <EntityType Name="BTW">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="BTW1" Type="Double" Nullable="false" />
+          <Property Name="StartDatum" Type="DateTime" Nullable="false" Precision="7" />
+          <Property Name="EindDatum" Type="DateTime" Precision="7" />
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
         </EntityType>
         <EntityType Name="SchakelType">
           <Key>
             <PropertyRef Name="ID" />
           </Key>
           <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Schakeltype1" Type="String" MaxLength="25" FixedLength="false" Unicode="true" Nullable="false" />
-          <NavigationProperty Name="AutoType" Relationship="Self.FK_AutoType_SchakelType" FromRole="SchakelType" ToRole="AutoType" />
+          <Property Name="Schakeltype1" Type="String" Nullable="false" MaxLength="25" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="AutoType" Relationship="Model.FK_AutoType_SchakelType" FromRole="SchakelType" ToRole="AutoType" />
         </EntityType>
         <EntityType Name="Verhuring">
           <Key>
@@ -262,15 +300,15 @@
           <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="StartDatum" Type="DateTime" Nullable="false" Precision="7" />
           <Property Name="EindDatum" Type="DateTime" Nullable="false" Precision="7" />
-          <Property Name="GebruikerID" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="Beschrijving" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="Prijs" Type="Decimal" Precision="19" Scale="4" Nullable="false" />
+          <Property Name="GebruikerID" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="Beschrijving" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Prijs" Type="Decimal" Nullable="false" Precision="19" Scale="4" />
           <Property Name="Geldig" Type="Boolean" Nullable="false" />
-          <NavigationProperty Name="Auto" Relationship="Self.VerhuringAutos" FromRole="Verhuring" ToRole="Auto" />
+          <NavigationProperty Name="Auto" Relationship="Model.VerhuringAutos" FromRole="Verhuring" ToRole="Auto" />
         </EntityType>
         <Association Name="FK_Auto_AutoType">
-          <End Role="AutoType" Type="Self.AutoType" Multiplicity="1" />
-          <End Role="Auto" Type="Self.Auto" Multiplicity="*" />
+          <End Type="Model.AutoType" Role="AutoType" Multiplicity="1" />
+          <End Type="Model.Auto" Role="Auto" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="AutoType">
               <PropertyRef Name="ID" />
@@ -281,8 +319,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_AutoPrijs_AutoType">
-          <End Role="AutoType" Type="Self.AutoType" Multiplicity="1" />
-          <End Role="AutoPrijs" Type="Self.AutoPrijs" Multiplicity="*" />
+          <End Type="Model.AutoType" Role="AutoType" Multiplicity="1" />
+          <End Type="Model.AutoPrijs" Role="AutoPrijs" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="AutoType">
               <PropertyRef Name="ID" />
@@ -293,8 +331,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_AutoType_Brandstof">
-          <End Role="Brandstof" Type="Self.Brandstof" Multiplicity="1" />
-          <End Role="AutoType" Type="Self.AutoType" Multiplicity="*" />
+          <End Type="Model.Brandstof" Role="Brandstof" Multiplicity="1" />
+          <End Type="Model.AutoType" Role="AutoType" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Brandstof">
               <PropertyRef Name="ID" />
@@ -305,8 +343,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_AutoType_SchakelType">
-          <End Role="SchakelType" Type="Self.SchakelType" Multiplicity="1" />
-          <End Role="AutoType" Type="Self.AutoType" Multiplicity="*" />
+          <End Type="Model.SchakelType" Role="SchakelType" Multiplicity="1" />
+          <End Type="Model.AutoType" Role="AutoType" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="SchakelType">
               <PropertyRef Name="ID" />
@@ -317,47 +355,9 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="VerhuringAutos">
-          <End Role="Auto" Type="Self.Auto" Multiplicity="*" />
-          <End Role="Verhuring" Type="Self.Verhuring" Multiplicity="*" />
+          <End Type="Model.Auto" Role="Auto" Multiplicity="*" />
+          <End Type="Model.Verhuring" Role="Verhuring" Multiplicity="*" />
         </Association>
-        <EntityContainer Name="Entities" annotation:LazyLoadingEnabled="true">
-          <EntitySet Name="Auto" EntityType="Self.Auto" />
-          <EntitySet Name="AutoPrijs" EntityType="Self.AutoPrijs" />
-          <EntitySet Name="AutoType" EntityType="Self.AutoType" />
-          <EntitySet Name="Brandstof" EntityType="Self.Brandstof" />
-          <EntitySet Name="SchakelType" EntityType="Self.SchakelType" />
-          <EntitySet Name="Verhuring" EntityType="Self.Verhuring" />
-          <AssociationSet Name="FK_Auto_AutoType" Association="Self.FK_Auto_AutoType">
-            <End Role="AutoType" EntitySet="AutoType" />
-            <End Role="Auto" EntitySet="Auto" />
-          </AssociationSet>
-          <AssociationSet Name="FK_AutoPrijs_AutoType" Association="Self.FK_AutoPrijs_AutoType">
-            <End Role="AutoType" EntitySet="AutoType" />
-            <End Role="AutoPrijs" EntitySet="AutoPrijs" />
-          </AssociationSet>
-          <AssociationSet Name="FK_AutoType_Brandstof" Association="Self.FK_AutoType_Brandstof">
-            <End Role="Brandstof" EntitySet="Brandstof" />
-            <End Role="AutoType" EntitySet="AutoType" />
-          </AssociationSet>
-          <AssociationSet Name="FK_AutoType_SchakelType" Association="Self.FK_AutoType_SchakelType">
-            <End Role="SchakelType" EntitySet="SchakelType" />
-            <End Role="AutoType" EntitySet="AutoType" />
-          </AssociationSet>
-          <AssociationSet Name="VerhuringAutos" Association="Self.VerhuringAutos">
-            <End Role="Auto" EntitySet="Auto" />
-            <End Role="Verhuring" EntitySet="Verhuring" />
-          </AssociationSet>
-          <EntitySet Name="BTW" EntityType="Model.BTW" />
-        </EntityContainer>
-        <EntityType Name="BTW">
-          <Key>
-            <PropertyRef Name="ID" />
-          </Key>
-          <Property Name="BTW1" Type="Double" Nullable="false" />
-          <Property Name="StartDatum" Type="DateTime" Nullable="false" Precision="7" />
-          <Property Name="EindDatum" Type="DateTime" Precision="7" />
-          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -367,79 +367,50 @@
           <EntitySetMapping Name="Auto">
             <EntityTypeMapping TypeName="Model.Auto">
               <MappingFragment StoreEntitySet="Auto">
-                <ScalarProperty Name="AutoID" ColumnName="AutoID" />
-                <ScalarProperty Name="AutoTypeID" ColumnName="AutoTypeID" />
-                <ScalarProperty Name="Kenteken" ColumnName="Kenteken" />
-                <ScalarProperty Name="BouwJaar" ColumnName="BouwJaar" />
                 <ScalarProperty Name="Beschikbaar" ColumnName="Beschikbaar" />
+                <ScalarProperty Name="BouwJaar" ColumnName="BouwJaar" />
+                <ScalarProperty Name="Kenteken" ColumnName="Kenteken" />
+                <ScalarProperty Name="AutoTypeID" ColumnName="AutoTypeID" />
+                <ScalarProperty Name="AutoID" ColumnName="AutoID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="AutoPrijs">
             <EntityTypeMapping TypeName="Model.AutoPrijs">
               <MappingFragment StoreEntitySet="AutoPrijs">
-                <ScalarProperty Name="StartDatum" ColumnName="StartDatum" />
-                <ScalarProperty Name="EindDatum" ColumnName="EindDatum" />
-                <ScalarProperty Name="Prijs" ColumnName="Prijs" />
                 <ScalarProperty Name="AutoTypeID" ColumnName="AutoTypeID" />
+                <ScalarProperty Name="Prijs" ColumnName="Prijs" />
+                <ScalarProperty Name="EindDatum" ColumnName="EindDatum" />
+                <ScalarProperty Name="StartDatum" ColumnName="StartDatum" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="AutoType">
             <EntityTypeMapping TypeName="Model.AutoType">
               <MappingFragment StoreEntitySet="AutoType">
-                <ScalarProperty Name="ID" ColumnName="ID" />
-                <ScalarProperty Name="Merk" ColumnName="Merk" />
-                <ScalarProperty Name="Type" ColumnName="Type" />
-                <ScalarProperty Name="LaadRuimte" ColumnName="LaadRuimte" />
-                <ScalarProperty Name="SchakelTypeID" ColumnName="SchakelTypeID" />
-                <ScalarProperty Name="Trekhaak" ColumnName="Trekhaak" />
-                <ScalarProperty Name="ZitPlaatsen" ColumnName="ZitPlaatsen" />
-                <ScalarProperty Name="BrandstofID" ColumnName="BrandstofID" />
-                <ScalarProperty Name="Gewicht" ColumnName="Gewicht" />
-                <ScalarProperty Name="AantalDeuren" ColumnName="AantalDeuren" />
-                <ScalarProperty Name="Uitvoering" ColumnName="Uitvoering" />
                 <ScalarProperty Name="Beschikbaar" ColumnName="Beschikbaar" />
+                <ScalarProperty Name="Uitvoering" ColumnName="Uitvoering" />
+                <ScalarProperty Name="AantalDeuren" ColumnName="AantalDeuren" />
+                <ScalarProperty Name="Gewicht" ColumnName="Gewicht" />
+                <ScalarProperty Name="BrandstofID" ColumnName="BrandstofID" />
+                <ScalarProperty Name="ZitPlaatsen" ColumnName="ZitPlaatsen" />
+                <ScalarProperty Name="Trekhaak" ColumnName="Trekhaak" />
+                <ScalarProperty Name="SchakelTypeID" ColumnName="SchakelTypeID" />
+                <ScalarProperty Name="LaadRuimte" ColumnName="LaadRuimte" />
+                <ScalarProperty Name="Type" ColumnName="Type" />
+                <ScalarProperty Name="Merk" ColumnName="Merk" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Brandstof">
             <EntityTypeMapping TypeName="Model.Brandstof">
               <MappingFragment StoreEntitySet="Brandstof">
-                <ScalarProperty Name="ID" ColumnName="ID" />
                 <ScalarProperty Name="BrandstofType" ColumnName="BrandstofType" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="SchakelType">
-            <EntityTypeMapping TypeName="Model.SchakelType">
-              <MappingFragment StoreEntitySet="SchakelType">
                 <ScalarProperty Name="ID" ColumnName="ID" />
-                <ScalarProperty Name="Schakeltype1" ColumnName="Schakeltype" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="Verhuring">
-            <EntityTypeMapping TypeName="Model.Verhuring">
-              <MappingFragment StoreEntitySet="Verhuring">
-                <ScalarProperty Name="ID" ColumnName="ID" />
-                <ScalarProperty Name="StartDatum" ColumnName="StartDatum" />
-                <ScalarProperty Name="EindDatum" ColumnName="EindDatum" />
-                <ScalarProperty Name="GebruikerID" ColumnName="GebruikerID" />
-                <ScalarProperty Name="Beschrijving" ColumnName="Beschrijving" />
-                <ScalarProperty Name="Prijs" ColumnName="Prijs" />
-                <ScalarProperty Name="Geldig" ColumnName="Geldig" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <AssociationSetMapping Name="VerhuringAutos" TypeName="Model.VerhuringAutos" StoreEntitySet="VerhuringAutos">
-            <EndProperty Name="Auto">
-              <ScalarProperty Name="AutoID" ColumnName="AutoID" />
-            </EndProperty>
-            <EndProperty Name="Verhuring">
-              <ScalarProperty Name="ID" ColumnName="VerhuringID" />
-            </EndProperty>
-          </AssociationSetMapping>
           <EntitySetMapping Name="BTW">
             <EntityTypeMapping TypeName="Model.BTW">
               <MappingFragment StoreEntitySet="BTW">
@@ -450,6 +421,35 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="SchakelType">
+            <EntityTypeMapping TypeName="Model.SchakelType">
+              <MappingFragment StoreEntitySet="SchakelType">
+                <ScalarProperty Name="Schakeltype1" ColumnName="Schakeltype" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Verhuring">
+            <EntityTypeMapping TypeName="Model.Verhuring">
+              <MappingFragment StoreEntitySet="Verhuring">
+                <ScalarProperty Name="Geldig" ColumnName="Geldig" />
+                <ScalarProperty Name="Prijs" ColumnName="Prijs" />
+                <ScalarProperty Name="Beschrijving" ColumnName="Beschrijving" />
+                <ScalarProperty Name="GebruikerID" ColumnName="GebruikerID" />
+                <ScalarProperty Name="EindDatum" ColumnName="EindDatum" />
+                <ScalarProperty Name="StartDatum" ColumnName="StartDatum" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <AssociationSetMapping Name="VerhuringAutos" TypeName="Model.VerhuringAutos" StoreEntitySet="VerhuringAutos">
+            <EndProperty Name="Verhuring">
+              <ScalarProperty Name="ID" ColumnName="VerhuringID" />
+            </EndProperty>
+            <EndProperty Name="Auto">
+              <ScalarProperty Name="AutoID" ColumnName="AutoID" />
+            </EndProperty>
+          </AssociationSetMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
