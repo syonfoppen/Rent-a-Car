@@ -20,11 +20,16 @@ namespace Rent_a_Car
                         "~/Scripts/modernizr-*"));
 
             bundles.Add(new ScriptBundle("~/bundles/bootstrap").Include(
-                      "~/Scripts/bootstrap.js"));
+                      "~/assets/js/freelancer.js",
+                      "~/Scripts/bootstrap.js",
+                      "~/assets/js/all.js"));
 
             bundles.Add(new StyleBundle("~/Content/css").Include(
-                      "~/Content/bootstrap.css",
-                      "~/Content/site.css"));
+                      //"~/Content/bootstrap.css",
+                      "~/assets/css/Login-Form-Dark.css",
+                      "~/assets/bootstrap/css/bootstrap.min.css",
+                      "~/Content/site.css",
+                      "~/assets/css/all.css"));
         }
     }
 }
