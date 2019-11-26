@@ -29,6 +29,7 @@ namespace Rent_a_Car
                       "~/assets/css/Login-Form-Dark.css",
                       "~/assets/bootstrap/css/bootstrap.min.css",
                       "~/Content/site.css",
+                      "~/assets/css/Pretty-Registration-Form.css",
                       "~/assets/css/all.css"));
         }
     }
