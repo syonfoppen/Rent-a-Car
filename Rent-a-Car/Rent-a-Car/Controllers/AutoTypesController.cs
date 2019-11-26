@@ -8,6 +8,7 @@ using System.Web;
 using System.Web.Mvc;
 using Rent_a_Car.Models;
 
+
 namespace Rent_a_Car.Controllers
 {
     public class AutoTypesController : Controller
@@ -49,12 +50,29 @@ namespace Rent_a_Car.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "ID,Merk,Type,LaadRuimte,SchakelTypeID,Trekhaak,ZitPlaatsen,BrandstofID,Gewicht,AantalDeuren,Uitvoering,Beschikbaar")] AutoType autoType)
+        public ActionResult Create([Bind(Include = "ID,Merk,Type,LaadRuimte,SchakelTypeID,Trekhaak,ZitPlaatsen,BrandstofID,Gewicht,AantalDeuren,Uitvoering,Beschikbaar,Foto,price,upload")] AutoType autoType, HttpPostedFileBase upload, decimal? price)
         {
             if (ModelState.IsValid)
             {
+                if (upload != null && upload.ContentLength > 0)
+                {
+                    using var reader = new System.IO.BinaryReader(upload.InputStream);
+                    autoType.Foto = reader.ReadBytes(upload.ContentLength);
+                }
+
+
                 db.AutoType.Add(autoType);
                 db.SaveChanges();
+
+                AutoPrijs autoPrijs = new AutoPrijs
+                {
+                    StartDatum = DateTime.Now,
+                    Prijs = Convert.ToDecimal(price),
+                    AutoTypeID = (from n in db.AutoType orderby n.ID descending select n.ID).First()
+                };
+                db.AutoPrijs.Add(autoPrijs);
+                db.SaveChanges();
+
                 return RedirectToAction("Index");
             }
 

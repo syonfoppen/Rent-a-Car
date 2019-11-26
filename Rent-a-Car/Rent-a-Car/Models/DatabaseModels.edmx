@@ -41,6 +41,7 @@
           <Property Name="AantalDeuren" Type="int" Nullable="false" />
           <Property Name="Uitvoering" Type="nvarchar" MaxLength="25" Nullable="false" />
           <Property Name="Beschikbaar" Type="bit" Nullable="false" />
+          <Property Name="Foto" Type="varbinary(max)" />
         </EntityType>
         <EntityType Name="Brandstof">
           <Key>
@@ -267,6 +268,7 @@
           <NavigationProperty Name="AutoPrijs" Relationship="Model.FK_AutoPrijs_AutoType" FromRole="AutoType" ToRole="AutoPrijs" />
           <NavigationProperty Name="Brandstof" Relationship="Model.FK_AutoType_Brandstof" FromRole="AutoType" ToRole="Brandstof" />
           <NavigationProperty Name="SchakelType" Relationship="Model.FK_AutoType_SchakelType" FromRole="AutoType" ToRole="SchakelType" />
+          <Property Name="Foto" Type="Binary" MaxLength="Max" FixedLength="false" />
         </EntityType>
         <EntityType Name="Brandstof">
           <Key>
@@ -388,6 +390,7 @@
           <EntitySetMapping Name="AutoType">
             <EntityTypeMapping TypeName="Model.AutoType">
               <MappingFragment StoreEntitySet="AutoType">
+                <ScalarProperty Name="Foto" ColumnName="Foto" />
                 <ScalarProperty Name="Beschikbaar" ColumnName="Beschikbaar" />
                 <ScalarProperty Name="Uitvoering" ColumnName="Uitvoering" />
                 <ScalarProperty Name="AantalDeuren" ColumnName="AantalDeuren" />
