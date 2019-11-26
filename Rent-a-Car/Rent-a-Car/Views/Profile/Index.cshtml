@@ -1,15 +1,23 @@
 ﻿@model Rent_a_Car.Models.RegisterViewModel
 @{
-    ViewBag.Title = "Register";
+    ViewBag.Title = "Profile";
+    Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>@ViewBag.Title.</h2>
+<h2>Profile</h2>
 
-@using (Html.BeginForm("Register", "Account", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+@{ 
+    if (@ViewBag.profileMessage != "")
+    {
+        <dev class="alert alert-@ViewBag.profileMessageColor">
+            @ViewBag.profileMessage
+        </dev>
+    }
+}
+
+@using (Html.BeginForm("Apply", "Profile", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
 {
     @Html.AntiForgeryToken()
-    <h4>Maak een nieuw account.</h4>
-    <hr />
     @Html.ValidationSummary("", new { @class = "text-danger" })
 
     <div class="row">
@@ -17,39 +25,45 @@
             <div class="form-group">
                 @Html.LabelFor(m => m.Voornaam, new { @class = "col-md-2 control-label" })
                 <div class="col-md-10">
-                    @Html.TextBoxFor(m => m.Voornaam, new { @class = "form-control" })
+                    @Html.TextBoxFor(m => m.Voornaam, new { @class = "form-control", @Value = @ViewBag.user.Voornaam })
                 </div>
             </div>
             <div class="form-group">
                 @Html.LabelFor(m => m.Tussenvoegsel, new { @class = "col-md-2 control-label" })
                 <div class="col-md-10">
-                    @Html.TextBoxFor(m => m.Tussenvoegsel, new { @class = "form-control" })
+                    @Html.TextBoxFor(m => m.Tussenvoegsel, new { @class = "form-control", @Value = @ViewBag.user.Tussenvoegsel })
                 </div>
             </div>
             <div class="form-group">
                 @Html.LabelFor(m => m.Achternaam, new { @class = "col-md-2 control-label" })
                 <div class="col-md-10">
-                    @Html.TextBoxFor(m => m.Achternaam, new { @class = "form-control" })
+                    @Html.TextBoxFor(m => m.Achternaam, new { @class = "form-control", @Value = @ViewBag.user.Achternaam })
                 </div>
             </div>
             <div class="form-group">
                 @Html.LabelFor(m => m.Geboortedatum, new { @class = "col-md-2 control-label" })
                 <div class="col-md-10">
-                    @Html.TextBoxFor(m => m.Geboortedatum, new { @class = "form-control", type="date" })
+                    @Html.TextBoxFor(m => m.Geboortedatum, new { @class = "form-control", type = "date", @Value = @DateTime.Parse(ViewBag.user.Geboortedatum.ToString()).ToString("yyyy-dd-MM") })
                 </div>
             </div>
 
             <br />
             <div class="form-group">
-                @Html.LabelFor(m => m.Password, new { @class = "col-md-2 control-label" })
+                @Html.LabelFor(m => m.ProfileCurrentPassword, new { @class = "col-md-2 control-label" })
                 <div class="col-md-10">
-                    @Html.PasswordFor(m => m.Password, new { @class = "form-control" })
+                    @Html.PasswordFor(m => m.ProfileCurrentPassword, new { @class = "form-control" })
                 </div>
             </div>
             <div class="form-group">
-                @Html.LabelFor(m => m.ConfirmPassword, new { @class = "col-md-2 control-label" })
+                @Html.LabelFor(m => m.ProfileNewPassword, new { @class = "col-md-2 control-label" })
                 <div class="col-md-10">
-                    @Html.PasswordFor(m => m.ConfirmPassword, new { @class = "form-control" })
+                    @Html.PasswordFor(m => m.ProfileNewPassword, new { @class = "form-control" })
+                </div>
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(m => m.ProfileNewConfirmPassword, new { @class = "col-md-2 control-label" })
+                <div class="col-md-10">
+                    @Html.PasswordFor(m => m.ProfileNewConfirmPassword, new { @class = "form-control" })
                 </div>
             </div>
 
@@ -57,13 +71,13 @@
             <div class="form-group">
                 @Html.LabelFor(m => m.PhoneNumber, new { @class = "col-md-2 control-label" })
                 <div class="col-md-10">
-                    @Html.TextBoxFor(m => m.PhoneNumber, new { @class = "form-control" })
+                    @Html.TextBoxFor(m => m.PhoneNumber, new { @class = "form-control", @Value = @ViewBag.user.PhoneNumber })
                 </div>
             </div>
             <div class="form-group">
                 @Html.LabelFor(m => m.Email, new { @class = "col-md-2 control-label" })
                 <div class="col-md-10">
-                    @Html.TextBoxFor(m => m.Email, new { @class = "form-control" })
+                    @Html.TextBoxFor(m => m.Email, new { @class = "form-control", @Value = @ViewBag.user.Email })
                 </div>
             </div>
         </div>
@@ -72,43 +86,43 @@
             <div class="form-group">
                 @Html.LabelFor(m => m.Land, new { @class = "col-md-2 control-label" })
                 <div class="col-md-10">
-                    @Html.TextBoxFor(m => m.Land, new { @class = "form-control" })
+                    @Html.TextBoxFor(m => m.Land, new { @class = "form-control", @Value = @ViewBag.user.Land })
                 </div>
             </div>
             <div class="form-group">
                 @Html.LabelFor(m => m.Provincie, new { @class = "col-md-2 control-label" })
                 <div class="col-md-10">
-                    @Html.TextBoxFor(m => m.Provincie, new { @class = "form-control" })
+                    @Html.TextBoxFor(m => m.Provincie, new { @class = "form-control", @Value = @ViewBag.user.Provincie })
                 </div>
             </div>
             <div class="form-group">
                 @Html.LabelFor(m => m.Plaats, new { @class = "col-md-2 control-label" })
                 <div class="col-md-10">
-                    @Html.TextBoxFor(m => m.Plaats, new { @class = "form-control" })
+                    @Html.TextBoxFor(m => m.Plaats, new { @class = "form-control", @Value = @ViewBag.user.Plaats })
                 </div>
             </div>
             <div class="form-group">
                 @Html.LabelFor(m => m.PostCode, new { @class = "col-md-2 control-label" })
                 <div class="col-md-10">
-                    @Html.TextBoxFor(m => m.PostCode, new { @class = "form-control" })
+                    @Html.TextBoxFor(m => m.PostCode, new { @class = "form-control", @Value = @ViewBag.user.PostCode })
                 </div>
             </div>
             <div class="form-group">
                 @Html.LabelFor(m => m.Straat, new { @class = "col-md-2 control-label" })
                 <div class="col-md-10">
-                    @Html.TextBoxFor(m => m.Straat, new { @class = "form-control" })
+                    @Html.TextBoxFor(m => m.Straat, new { @class = "form-control", @Value = @ViewBag.user.Straat })
                 </div>
             </div>
             <div class="form-group">
                 @Html.LabelFor(m => m.Huisnummer, new { @class = "col-md-2 control-label" })
                 <div class="col-md-10">
-                    @Html.TextBoxFor(m => m.Huisnummer, new { @class = "form-control" })
+                    @Html.TextBoxFor(m => m.Huisnummer, new { @class = "form-control", @Value = @ViewBag.user.Huisnummer })
                 </div>
             </div>
             <div class="form-group">
                 @Html.LabelFor(m => m.Toevoeging, new { @class = "col-md-2 control-label" })
                 <div class="col-md-10">
-                    @Html.TextBoxFor(m => m.Toevoeging, new { @class = "form-control" })
+                    @Html.TextBoxFor(m => m.Toevoeging, new { @class = "form-control", @Value = @ViewBag.user.Toevoeging })
                 </div>
             </div>
         </div>
@@ -116,13 +130,9 @@
         <div class="col text-center">
             <div class="form-group">
                 <div class="col-md-offset-2 col-md-10">
-                    <input type="submit" class="btn btn-primary" value="Register" />
+                    <input type="submit" class="btn btn-primary" value="Apply" />
                 </div>
             </div>
         </div>
     </div>
 }
-
-        @section Scripts {
-            @Scripts.Render("~/bundles/jqueryval")
-        }
