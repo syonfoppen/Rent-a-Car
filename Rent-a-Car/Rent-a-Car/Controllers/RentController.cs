@@ -18,9 +18,7 @@ namespace Rent_a_Car.Controllers
         public ActionResult Index()
         {
             var autoTypes = db.AutoType;
-            return View(autoTypes.ToList());
+            return View(autoTypes.Where(t => t.Beschikbaar == true).ToList());
         }
-
-
     }
 }

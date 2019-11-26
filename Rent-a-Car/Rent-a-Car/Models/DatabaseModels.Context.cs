@@ -12,6 +12,8 @@ namespace Rent_a_Car.Models
     using System;
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
+    using System.Data.Entity.Core.Objects;
+    using System.Linq;
     
     public partial class Entities : DbContext
     {
@@ -32,5 +34,18 @@ namespace Rent_a_Car.Models
         public virtual DbSet<BTW> BTW { get; set; }
         public virtual DbSet<SchakelType> SchakelType { get; set; }
         public virtual DbSet<Verhuring> Verhuring { get; set; }
+    
+        public virtual ObjectResult<Nullable<decimal>> spGetAutoPrice(Nullable<System.DateTime> cHECKINDATE, Nullable<int> autoTypeID)
+        {
+            var cHECKINDATEParameter = cHECKINDATE.HasValue ?
+                new ObjectParameter("CHECKINDATE", cHECKINDATE) :
+                new ObjectParameter("CHECKINDATE", typeof(System.DateTime));
+    
+            var autoTypeIDParameter = autoTypeID.HasValue ?
+                new ObjectParameter("AutoTypeID", autoTypeID) :
+                new ObjectParameter("AutoTypeID", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Nullable<decimal>>("spGetAutoPrice", cHECKINDATEParameter, autoTypeIDParameter);
+        }
     }
 }
