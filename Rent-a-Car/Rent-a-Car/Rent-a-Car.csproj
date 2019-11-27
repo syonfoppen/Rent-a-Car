@@ -186,6 +186,7 @@
     <Compile Include="Controllers\RentController.cs" />
     <Compile Include="Controllers\ShoppingCardController.cs" />
     <Compile Include="Controllers\ProfileController.cs" />
+    <Compile Include="Controllers\ViewHiresController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -368,6 +369,7 @@
     <Content Include="Views\Autos\Edit.cshtml" />
     <Content Include="Views\Autos\Index.cshtml" />
     <Content Include="Views\Profile\Index.cshtml" />
+    <Content Include="Views\ViewHires\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
