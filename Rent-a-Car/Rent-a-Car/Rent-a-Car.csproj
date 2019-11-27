@@ -359,12 +359,10 @@
     <Content Include="Scripts\popper-utils.min.js.map" />
     <Content Include="Scripts\popper-utils.js.map" />
     <Content Include="Views\AutoTypes\Create.cshtml" />
-    <Content Include="Views\AutoTypes\Delete.cshtml" />
     <Content Include="Views\AutoTypes\Details.cshtml" />
     <Content Include="Views\AutoTypes\Edit.cshtml" />
     <Content Include="Views\AutoTypes\Index.cshtml" />
     <Content Include="Views\Autos\Create.cshtml" />
-    <Content Include="Views\Autos\Delete.cshtml" />
     <Content Include="Views\Autos\Details.cshtml" />
     <Content Include="Views\Autos\Edit.cshtml" />
     <Content Include="Views\Autos\Index.cshtml" />
