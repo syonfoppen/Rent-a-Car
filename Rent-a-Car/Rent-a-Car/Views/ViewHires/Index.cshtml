@@ -1,4 +1,5 @@
 ﻿@model IEnumerable<Rent_a_Car.Models.Verhuring>
+@using Microsoft.AspNet.Identity;
 
 @{
     ViewBag.Title = "Index";
@@ -25,24 +26,29 @@
         <th></th>
     </tr>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.StartDatum)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.EindDatum)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Beschrijving)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Prijs)
-        </td>
-        <td>
-            @Html.ActionLink("Annuleren", "Cancel", new { id=item.ID })
-        </td>
-    </tr>
-}
+    @foreach (var item in Model)
+    {
+        if (User.IsInRole("Gebruiker") && item.GebruikerID != User.Identity.GetUserId())
+        {
+            continue;
+        }
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.StartDatum)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.EindDatum)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Beschrijving)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Prijs)
+            </td>
+            <td>
+                @Html.ActionLink("Annuleren", "Cancel", new { id = item.ID })
+            </td>
+        </tr>
+    }
 
 </table>
