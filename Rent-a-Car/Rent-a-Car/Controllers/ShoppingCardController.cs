@@ -16,6 +16,7 @@ namespace Rent_a_Car.Controllers
 
 
         // GET: ShoppingCard
+        [Route("MijnAutos")]
         public ActionResult Index()
         {
             Dictionary<AutoType, int> filteredautoTypes = null;
