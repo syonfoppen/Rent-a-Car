@@ -6,14 +6,14 @@ using System.Web;
 using System.Web.Mvc;
 using Microsoft.AspNet.Identity;
 
+
 namespace Rent_a_Car.Controllers
 {
+    
     [Authorize]
     public class ShoppingCardController : Controller
     {
         private Entities db = new Entities();
-
-
 
         // GET: ShoppingCard
         public ActionResult Index()
