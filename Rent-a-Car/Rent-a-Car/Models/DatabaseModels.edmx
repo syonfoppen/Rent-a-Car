@@ -41,6 +41,7 @@
           <Property Name="AantalDeuren" Type="int" Nullable="false" />
           <Property Name="Uitvoering" Type="nvarchar" MaxLength="25" Nullable="false" />
           <Property Name="Beschikbaar" Type="bit" Nullable="false" />
+          <Property Name="Foto" Type="varbinary(max)" />
         </EntityType>
         <EntityType Name="Brandstof">
           <Key>
@@ -73,7 +74,7 @@
           <Property Name="StartDatum" Type="datetime2" Precision="7" Nullable="false" />
           <Property Name="EindDatum" Type="datetime2" Precision="7" Nullable="false" />
           <Property Name="GebruikerID" Type="nvarchar" MaxLength="128" Nullable="false" />
-          <Property Name="Beschrijving" Type="text" Nullable="false" />
+          <Property Name="Beschrijving" Type="text" />
           <Property Name="Prijs" Type="money" Nullable="false" />
           <Property Name="Geldig" Type="bit" Nullable="false" />
         </EntityType>
@@ -157,6 +158,10 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Function Name="spGetAutoPrice" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="CHECKINDATE" Type="date" Mode="In" />
+          <Parameter Name="AutoTypeID" Type="int" Mode="In" />
+        </Function>
         <EntityContainer Name="ModelStoreContainer">
           <EntitySet Name="Auto" EntityType="Self.Auto" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="AutoPrijs" EntityType="Self.AutoPrijs" Schema="dbo" store:Type="Tables" />
@@ -223,6 +228,10 @@
             <End Role="Auto" EntitySet="Auto" />
             <End Role="Verhuring" EntitySet="Verhuring" />
           </AssociationSet>
+          <FunctionImport Name="spGetAutoPrice" ReturnType="Collection(Decimal)">
+            <Parameter Name="CHECKINDATE" Mode="In" Type="DateTime" />
+            <Parameter Name="AutoTypeID" Mode="In" Type="Int32" />
+          </FunctionImport>
         </EntityContainer>
         <EntityType Name="Auto">
           <Key>
@@ -267,6 +276,7 @@
           <NavigationProperty Name="AutoPrijs" Relationship="Model.FK_AutoPrijs_AutoType" FromRole="AutoType" ToRole="AutoPrijs" />
           <NavigationProperty Name="Brandstof" Relationship="Model.FK_AutoType_Brandstof" FromRole="AutoType" ToRole="Brandstof" />
           <NavigationProperty Name="SchakelType" Relationship="Model.FK_AutoType_SchakelType" FromRole="AutoType" ToRole="SchakelType" />
+          <Property Name="Foto" Type="Binary" MaxLength="Max" FixedLength="false" />
         </EntityType>
         <EntityType Name="Brandstof">
           <Key>
@@ -301,7 +311,7 @@
           <Property Name="StartDatum" Type="DateTime" Nullable="false" Precision="7" />
           <Property Name="EindDatum" Type="DateTime" Nullable="false" Precision="7" />
           <Property Name="GebruikerID" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
-          <Property Name="Beschrijving" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Beschrijving" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="true" />
           <Property Name="Prijs" Type="Decimal" Nullable="false" Precision="19" Scale="4" />
           <Property Name="Geldig" Type="Boolean" Nullable="false" />
           <NavigationProperty Name="Auto" Relationship="Model.VerhuringAutos" FromRole="Verhuring" ToRole="Auto" />
@@ -388,6 +398,7 @@
           <EntitySetMapping Name="AutoType">
             <EntityTypeMapping TypeName="Model.AutoType">
               <MappingFragment StoreEntitySet="AutoType">
+                <ScalarProperty Name="Foto" ColumnName="Foto" />
                 <ScalarProperty Name="Beschikbaar" ColumnName="Beschikbaar" />
                 <ScalarProperty Name="Uitvoering" ColumnName="Uitvoering" />
                 <ScalarProperty Name="AantalDeuren" ColumnName="AantalDeuren" />
@@ -450,6 +461,7 @@
               <ScalarProperty Name="AutoID" ColumnName="AutoID" />
             </EndProperty>
           </AssociationSetMapping>
+          <FunctionImportMapping FunctionImportName="spGetAutoPrice" FunctionName="Model.Store.spGetAutoPrice" />
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

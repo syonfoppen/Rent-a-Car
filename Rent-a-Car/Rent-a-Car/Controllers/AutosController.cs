@@ -17,6 +17,7 @@ namespace Rent_a_Car.Controllers
         // GET: Autos
         public ActionResult Index()
         {
+            
             var auto = db.Auto.Include(a => a.AutoType);
             return View(auto.ToList());
         }

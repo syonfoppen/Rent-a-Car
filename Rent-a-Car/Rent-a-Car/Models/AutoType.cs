@@ -33,6 +33,7 @@ namespace Rent_a_Car.Models
         public int AantalDeuren { get; set; }
         public string Uitvoering { get; set; }
         public bool Beschikbaar { get; set; }
+        public byte[] Foto { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Auto> Auto { get; set; }
