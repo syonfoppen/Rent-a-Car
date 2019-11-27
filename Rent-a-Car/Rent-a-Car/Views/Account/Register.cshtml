@@ -27,6 +27,7 @@
 {
 
 }
+<div class="container">
     <div class="row register-form" style="background-color: #283655;">
         <div class="col-md-8 col-xl-10 offset-md-2 offset-xl-1">
             <form class="custom-form" style="background-color: #4d648d;color: rgb(255,255,255);" action="/Account/Register" role="form" method="post">
@@ -85,19 +86,13 @@
                                 <div class="col-sm-4 label-column"><label class="col-form-label" for="repeat-pawssword-input-field" style="color: rgb(255,255,255);">Straat</label></div>
                                 <div class="col-sm-6 input-column">@Html.TextBoxFor(m => m.Straat, new { @class = "form-control" })</div>
                             </div>
-                            <div class="form-row">
-                                <div class="col">
-                                    <div class="form-row form-group">
-                                        <div class="col-sm-4 offset-xl-4 label-column"><label class="col-form-label" for="repeat-pawssword-input-field" style="color: rgb(255,255,255);">Huisnummer</label></div>
-                                        <div class="col-sm-6 col-xl-4 offset-xl-0 input-column">@Html.TextBoxFor(m => m.Huisnummer, new { @class = "form-control" })</div>
-                                    </div>
-                                </div>
-                                <div class="col">
-                                    <div class="form-row form-group">
-                                        <div class="col-sm-4 offset-xl-0 label-column"><label class="col-form-label" for="repeat-pawssword-input-field" style="color: rgb(255,255,255);">Toevoeging</label></div>
-                                        <div class="col-sm-6 col-xl-4 input-column">@Html.TextBoxFor(m => m.Toevoeging, new { @class = "form-control" })</div>
-                                    </div>
-                                </div>
+                            <div class="form-row form-group">
+                                <div class="col-sm-4 label-column"><label class="col-form-label" for="repeat-pawssword-input-field" style="color: rgb(255,255,255);">Huisnummer</label></div>
+                                <div class="col-sm-6 input-column">@Html.TextBoxFor(m => m.Huisnummer, new { @class = "form-control" })</div>
+                            </div>
+                            <div class="form-row form-group">
+                                <div class="col-sm-4 label-column"><label class="col-form-label" for="repeat-pawssword-input-field" style="color: rgb(255,255,255);">Toevoeging</label></div>
+                                <div class="col-sm-6 input-column">@Html.TextBoxFor(m => m.Toevoeging, new { @class = "form-control" })</div>
                             </div>
                         </div>
                     </div>
@@ -116,10 +111,12 @@
             </form>
         </div>
     </div>
-
-
+@Scripts.Render("~/bundles/jquery")
+@Scripts.Render("~/bundles/bootstrap")
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/js/bootstrap.bundle.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.4.1/jquery.easing.min.js"></script>
+<script src="assets/js/freelancer.js"></script>
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
 }
-
-        @section Scripts {
-            @Scripts.Render("~/bundles/jqueryval")
-        }

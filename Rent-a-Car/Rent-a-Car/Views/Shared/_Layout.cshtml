@@ -27,24 +27,26 @@
             </button>
             <div class="collapse navbar-collapse" id="navbarResponsive">
                 <ul class="nav navbar-nav ml-auto">
-                    <li class="nav-item mx-0 mx-lg-1" role="presentation"><a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="~/home">Huur auto</a></li>
+                    <li class="nav-item mx-0 mx-lg-1" role="presentation"><a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="~/rent">Huur auto</a></li>
                 </ul>
                 @Html.Partial("_LoginPartial")
-            <p>
-                @{
-                    if (Session["ShoppingCard"] != null)
-                    {
-                        List<Rent_a_Car.Models.AutoType> autoTypeslist = (List<Rent_a_Car.Models.AutoType>)Session["ShoppingCard"];
-                        <text>Items in shopping list: @autoTypeslist.Count</text>
-
-                    }
-                    else
-                    {
-                        <text>Items in shopping list: 0</text>
-                    }
-
+                @if(User.Identity.IsAuthenticated)
+                {
+                    <span>&nbsp&nbsp&nbsp&nbsp</span>
+                        if (Session["ShoppingCard"] != null)
+                        {
+                            List<Rent_a_Car.Models.AutoType> autoTypeslist = (List<Rent_a_Car.Models.AutoType>)Session["ShoppingCard"];
+                                <a href="/shoppingcard/">
+                                    <div class="text-white"><h4 style="font-size: 25px;" class="fas fa-car text-white"></h4>&nbsp @autoTypeslist.Count</div>
+                                </a>
+                        }
+                        else
+                        {
+                            <a href="/shoppingcard/">
+                                <div class="text-white"><h4 style="font-size: 25px;" class="fas fa-car text-white"></h4>&nbsp0</div>
+                            </a>
+                        }
                 }
-            </p>
             </div>
         </div>
     </nav>
