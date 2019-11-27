@@ -59,10 +59,10 @@ namespace Rent_a_Car.Controllers
                             foreach (AutoType item in autoTypeslist)
                             {
                                 //kijk of dat er autos bestaan van het geselecteerde type auto
-                                if (db.Auto.Where(table => table.AutoType.ID == item.ID).Count() > 0)
+                                if (db.Auto.Where(table => table.AutoType.ID == item.ID && table.Beschikbaar == true).Count() > 0)
                                 {
                                     prijs += (decimal)db.spGetAutoPrice(begindatum, item.ID).First() * verhuringlengte.Days;
-                                    List<Auto> autolijst = db.Auto.Where(table => table.AutoTypeID == item.ID).ToList();
+                                    List<Auto> autolijst = db.Auto.Where(table => table.AutoTypeID == item.ID && table.Beschikbaar == true).ToList();
                                     List<Verhuring> verhurings = db.Verhuring.Where(table => (table.StartDatum > eindatum) && (begindatum > table.EindDatum) && table.Geldig == true).ToList();
 
                                     foreach (Auto auto in autolijst)
