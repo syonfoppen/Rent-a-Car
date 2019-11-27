@@ -37,18 +37,20 @@ namespace Rent_a_Car.Controllers
             //Kijk of de session waar de geselecteerde autos bestaat
             if (Session["ShoppingCard"] != null)
             {
+                //type cast de session
+                List<AutoType> autoTypeslist = (List<AutoType>)Session["ShoppingCard"];
+                //Maak een list voor de winkelwagen pagina zelf
+                filteredautoTypes = autoTypeslist.GroupBy(t => t.ID).ToDictionary(t => t.First(), y => y.Count());
                 //bekijk of de geselecteerde begin datum niet later is dan de datum van vandaag
                 if (begindatum > DateTime.Now)
                 {
                     //kijk of de eind datum niet eerder is dan de begin datum
                     if (begindatum < eindatum)
                     {
-                        //type cast de session
-                        List<AutoType> autoTypeslist = (List<AutoType>)Session["ShoppingCard"];
 
-                        //Maak een list voor de winkelwagen pagina zelf
-                        filteredautoTypes = autoTypeslist.GroupBy(t => t.ID).ToDictionary(t => t.First(), y => y.Count());
-                        
+
+
+
                         List<Auto> gesleceteerdeautos = new List<Auto>();
                         decimal prijs = 0;
                         TimeSpan verhuringlengte = eindatum - begindatum;
@@ -58,41 +60,39 @@ namespace Rent_a_Car.Controllers
                         {
                             foreach (AutoType item in autoTypeslist)
                             {
-                                //kijk of dat er autos bestaan van het geselecteerde type auto
-                                if (db.Auto.Where(table => table.AutoType.ID == item.ID && table.Beschikbaar == true).Count() > 0)
+                                //breken de prijs van de huring
+                                prijs += (decimal)db.spGetAutoPrice(begindatum, item.ID).First() * verhuringlengte.Days;
+                                foreach (var auto in item.Auto)
                                 {
-                                    prijs += (decimal)db.spGetAutoPrice(begindatum, item.ID).First() * verhuringlengte.Days;
-                                    List<Auto> autolijst = db.Auto.Where(table => table.AutoTypeID == item.ID && table.Beschikbaar == true).ToList();
-                                    List<Verhuring> verhurings = db.Verhuring.Where(table => (table.StartDatum > eindatum) && (begindatum > table.EindDatum) && table.Geldig == true).ToList();
-
-                                    foreach (Auto auto in autolijst)
+                                    //kijk of de auto beschikbaar is zo ja voeg deze toe aan de lijst van autos
+                                    if ((db.Verhuring.Where(t => (t.Geldig == true) && (t.StartDatum <= eindatum) && (eindatum <= t.EindDatum) && (t.Auto.Where(d => d.AutoID == auto.AutoID).Count() > 0)).Count() == 0) && (gesleceteerdeautos.Where(t => t.AutoID == auto.AutoID).Count() == 0))
                                     {
-                                        //als de auto beschikbaar is voeg die dan toe aan een lijst
-                                        if (verhurings.Where(table => table.Auto.Where(autotable => autotable.AutoID == auto.AutoID).Count() == 0).Count() == 0 && gesleceteerdeautos.Where(t => t.AutoID == auto.AutoID).Count() == 0)
-                                        {
-                                            gesleceteerdeautos.Add(auto);
-                                            break;
-                                        }
-
+                                        gesleceteerdeautos.Add(auto);
+                                        break;
                                     }
-
-                                    //error als er geen autos beschikbaar zijn van het type auto
+                                }
+                                //geef een error als er geen autos beschikbaar zijn van het auto type
+                                if (gesleceteerdeautos.Where(t => t.AutoType.ID == item.ID).Count() == 0)
+                                {
                                     ViewBag.Message = string.Format("Er zijn geen autos beschikbaar van het type {0} tussen {1} en {2}!", string.Format("{0} {1} - {2}", item.Merk, item.Type, item.Uitvoering), begindatum.ToString(), eindatum.ToString());
                                     return View(filteredautoTypes);
-
                                 }
-                                //error als er geen autos bestaan van het type auto
-                                ViewBag.Message = string.Format("Wij hebben geen autos van het type {0}", string.Format("{0} {1} - {2}", item.Merk, item.Type, item.Uitvoering));
-                                return View(filteredautoTypes);
                             }
+                           
                             if (gesleceteerdeautos.Count != 0)
                             {
+                                List<Auto> gesleceteerdeautosReal = new List<Auto>();
+                                foreach (var item in gesleceteerdeautos)
+                                {
+                                    gesleceteerdeautosReal.Add(db.Auto.Find(item.AutoID));
+                                }
+
                                 //maak een nieuwe verhuring aan
                                 Verhuring newVerhuring = new Verhuring
                                 {
                                     StartDatum = begindatum,
                                     EindDatum = eindatum,
-                                    Auto = gesleceteerdeautos,
+                                    Auto = gesleceteerdeautosReal,
                                     GebruikerID = User.Identity.GetUserId(),
                                     Prijs = prijs,
                                     Geldig = true
@@ -100,6 +100,8 @@ namespace Rent_a_Car.Controllers
                                 db.Verhuring.Add(newVerhuring);
                                 db.SaveChanges();
                                 Session.Clear();
+                                ViewBag.Message = "Succes!!"; //MOET WORDEN VERANDERD
+                                return View();
                             }
                         }
                         ViewBag.Message = "Uw winkelmandje is leeg!";
