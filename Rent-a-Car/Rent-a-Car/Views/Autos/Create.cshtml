@@ -19,12 +19,12 @@
         <div class="form-group">
             @Html.LabelFor(model => model.AutoTypeID, "AutoTypeID", htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                <input list="AutoTypeID" class="form-control">
-                <datalist name="AutoTypeID" id="AutoTypeID" >
+                <input name="AutoTypeID" id="AutoTypeID" list="AutoTypelist" class="form-control">
+                <datalist id="AutoTypelist" >
                     @{
                         foreach (var auto in autoTypes)
                         {
-                         <option value="@auto.ID">@auto.Merk @auto.Type @auto.Uitvoering</option>
+                         <option n value="@auto.ID">@auto.Merk @auto.Type @auto.Uitvoering</option>
                         }
                     }
                 </datalist>

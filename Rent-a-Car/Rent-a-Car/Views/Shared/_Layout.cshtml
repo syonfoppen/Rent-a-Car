@@ -30,6 +30,21 @@
                     <li class="nav-item mx-0 mx-lg-1" role="presentation"><a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="~/home">Huur auto</a></li>
                 </ul>
                 @Html.Partial("_LoginPartial")
+            <p>
+                @{
+                    if (Session["ShoppingCard"] != null)
+                    {
+                        List<Rent_a_Car.Models.AutoType> autoTypeslist = (List<Rent_a_Car.Models.AutoType>)Session["ShoppingCard"];
+                        <text>Items in shopping list: @autoTypeslist.Count</text>
+
+                    }
+                    else
+                    {
+                        <text>Items in shopping list: 0</text>
+                    }
+
+                }
+            </p>
             </div>
         </div>
     </nav>
