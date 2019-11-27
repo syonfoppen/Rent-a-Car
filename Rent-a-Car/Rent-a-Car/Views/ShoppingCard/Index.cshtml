@@ -4,6 +4,12 @@
 
 }
 
+<style>
+    a {
+        color: black !important;
+    }
+</style>
+
 <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/bs4/dt-1.10.20/b-1.6.1/r-2.2.3/datatables.min.css" />
 
 
@@ -44,7 +50,7 @@
                             <tr>
                                 <td>@item.Key.Merk @item.Key.Type - @item.Key.Uitvoering</td>
                                 <td>@item.Value  <span style="float:right;"><a href="/shoppingcard/AddToCard/@item.Key.ID"><i class="fas fa-chevron-up"></i></a><br /><a href="/shoppingcard/RemoveFromCard/@item.Key.ID"><i class="fas fa-chevron-down"></i></a></span></td>
-                                <td><a href="#">Details</a> | <a href="/shoppingcard/RemoveAllFromCard/@item.Key.ID">Alles Verwijderen</a></td>
+                                <td style="text-align: right;"><a href="#">Details</a> | <a href="/shoppingcard/RemoveAllFromCard/@item.Key.ID">Alles Verwijderen</a></td>
                             </tr>
                         }
                     }
