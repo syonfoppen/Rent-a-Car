@@ -1,0 +1,155 @@
+﻿@model Rent_a_Car.Models.AspNetUsers
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>AspNetUsers</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Voornaam)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Voornaam)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Tussenvoegsel)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Tussenvoegsel)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Achternaam)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Achternaam)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Geboortedatum)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Geboortedatum)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Straat)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Straat)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Huisnummer)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Huisnummer)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Toevoeging)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Toevoeging)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.PostCode)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PostCode)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Plaats)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Plaats)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Provincie)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Provincie)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Land)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Land)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Email)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Email)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.EmailConfirmed)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.EmailConfirmed)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.PhoneNumber)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PhoneNumber)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.UserName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.UserName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.TwoFactorEnabled)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TwoFactorEnabled)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Lockout)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Lockout)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

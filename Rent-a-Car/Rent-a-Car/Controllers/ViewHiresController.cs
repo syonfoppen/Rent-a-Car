@@ -10,6 +10,7 @@ using Rent_a_Car.Models;
 
 namespace Rent_a_Car.Controllers
 {
+    [Authorize]
     public class ViewHiresController : Controller
     {
         private Entities db = new Entities();
