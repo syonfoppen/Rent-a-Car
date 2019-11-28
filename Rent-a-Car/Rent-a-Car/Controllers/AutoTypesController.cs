@@ -103,10 +103,34 @@ namespace Rent_a_Car.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "ID,Merk,Type,LaadRuimte,SchakelTypeID,Trekhaak,ZitPlaatsen,BrandstofID,Gewicht,AantalDeuren,Uitvoering,Beschikbaar")] AutoType autoType)
+        public ActionResult Edit([Bind(Include = "ID,Merk,Type,LaadRuimte,SchakelTypeID,Trekhaak,ZitPlaatsen,BrandstofID,Gewicht,AantalDeuren,Uitvoering,Beschikbaar")] AutoType autoType, HttpPostedFileBase upload, decimal? price)
         {
             if (ModelState.IsValid)
             {
+                if (upload != null && upload.ContentLength > 0)
+                {
+                    using var reader = new System.IO.BinaryReader(upload.InputStream);
+                    autoType.Foto = reader.ReadBytes(upload.ContentLength);
+                }
+
+                if (price != null)
+                {
+                    AutoPrijs oldlodgeprice = db.AutoPrijs.Where(t => t.AutoTypeID == autoType.ID && t.EindDatum == null).First();
+
+                    oldlodgeprice.EindDatum = DateTime.Now;
+                    db.Entry(oldlodgeprice).State = EntityState.Modified;
+
+                    AutoPrijs lodgePrice = new AutoPrijs
+                    {
+                        StartDatum = DateTime.Now,
+                        Prijs = (decimal)price,
+                        AutoTypeID = autoType.ID
+                    };
+
+                    db.AutoPrijs.Add(lodgePrice);
+                }
+
+
                 db.Entry(autoType).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
@@ -114,32 +138,6 @@ namespace Rent_a_Car.Controllers
             ViewBag.BrandstofID = new SelectList(db.Brandstof, "ID", "BrandstofType", autoType.BrandstofID);
             ViewBag.SchakelTypeID = new SelectList(db.SchakelType, "ID", "Schakeltype1", autoType.SchakelTypeID);
             return View(autoType);
-        }
-
-        // GET: AutoTypes/Delete/5
-        public ActionResult Delete(int? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            AutoType autoType = db.AutoType.Find(id);
-            if (autoType == null)
-            {
-                return HttpNotFound();
-            }
-            return View(autoType);
-        }
-
-        // POST: AutoTypes/Delete/5
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(int id)
-        {
-            AutoType autoType = db.AutoType.Find(id);
-            db.AutoType.Remove(autoType);
-            db.SaveChanges();
-            return RedirectToAction("Index");
         }
 
         protected override void Dispose(bool disposing)

@@ -73,11 +73,28 @@ namespace Rent_a_Car.Models
         [Required]
         [StringLength(100, ErrorMessage = "Het {0} moet ten minste {2} karakters lang zijn.", MinimumLength = 6)]
         [DataType(DataType.Password)]
+        [Display(Name = "huidig Wachtwoord")]
+        public string ProfileCurrentPassword { get; set; }
+
+        [Required]
+        [StringLength(100, ErrorMessage = "Het {0} moet ten minste {2} karakters lang zijn.", MinimumLength = 6)]
+        [DataType(DataType.Password)]
+        [Display(Name = "nieuw Wachtwoord")]
+        public string ProfileNewPassword { get; set; }
+
+        [DataType(DataType.Password)]
+        [Display(Name = "Bevestig nieuw wachtwoord")]
+        [Compare("ProfileNewPassword", ErrorMessage = "Het nieuwe wachtwoord en de bevestiging ervoor komen niet overeen.")]
+        public string ProfileNewConfirmPassword { get; set; }
+
+        [Required]
+        [StringLength(100, ErrorMessage = "Het {0} moet ten minste {2} karakters lang zijn.", MinimumLength = 6)]
+        [DataType(DataType.Password)]
         [Display(Name = "Wachtwoord")]
         public string Password { get; set; }
 
         [DataType(DataType.Password)]
-        [Display(Name = "Bevestigings wachtwoord")]
+        [Display(Name = "Bevestig wachtwoord")]
         [Compare("Password", ErrorMessage = "Het wachtwoord en bevestigings wachtwoord komen niet overeen.")]
         public string ConfirmPassword { get; set; }
 
