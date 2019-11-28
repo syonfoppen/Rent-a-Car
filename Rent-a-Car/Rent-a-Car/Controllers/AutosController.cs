@@ -79,6 +79,7 @@ namespace Rent_a_Car.Controllers
                 return HttpNotFound();
             }
             ViewBag.AutoTypeID = new SelectList(db.AutoType, "ID", "Merk", auto.AutoTypeID);
+            ViewBag.Id = id;
             return View(auto);
         }
 

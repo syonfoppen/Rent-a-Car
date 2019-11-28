@@ -34,6 +34,10 @@ namespace Rent_a_Car.Models
         public virtual DbSet<BTW> BTW { get; set; }
         public virtual DbSet<SchakelType> SchakelType { get; set; }
         public virtual DbSet<Verhuring> Verhuring { get; set; }
+        public virtual DbSet<AspNetRoles> AspNetRoles { get; set; }
+        public virtual DbSet<AspNetUserClaims> AspNetUserClaims { get; set; }
+        public virtual DbSet<AspNetUserLogins> AspNetUserLogins { get; set; }
+        public virtual DbSet<AspNetUsers> AspNetUsers { get; set; }
     
         public virtual ObjectResult<Nullable<decimal>> spGetAutoPrice(Nullable<System.DateTime> cHECKINDATE, Nullable<int> autoTypeID)
         {
