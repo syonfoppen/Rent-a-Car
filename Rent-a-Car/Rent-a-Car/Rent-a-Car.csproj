@@ -185,9 +185,13 @@
     <Compile Include="Controllers\AdminController.cs" />
     <Compile Include="Controllers\AutosController.cs" />
     <Compile Include="Controllers\AutoTypesController.cs" />
+    <Compile Include="Controllers\AutoVerhuringsOverzichtController.cs" />
+    <Compile Include="Controllers\BrandstofController.cs" />
+    <Compile Include="Controllers\BTWsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\RentController.cs" />
+    <Compile Include="Controllers\SchakelTypesController.cs" />
     <Compile Include="Controllers\ShoppingCardController.cs" />
     <Compile Include="Controllers\ProfileController.cs" />
     <Compile Include="Controllers\ViewHiresController.cs" />
@@ -384,6 +388,19 @@
     <Content Include="Views\ViewHires\Index.cshtml" />
     <Content Include="Views\Shared\_layoutAdmin.cshtml" />
     <Content Include="Views\Admin\Index.cshtml" />
+    <Content Include="Views\SchakelTypes\Create.cshtml" />
+    <Content Include="Views\SchakelTypes\Delete.cshtml" />
+    <Content Include="Views\SchakelTypes\Edit.cshtml" />
+    <Content Include="Views\SchakelTypes\Index.cshtml" />
+    <Content Include="Views\BTWs\Create.cshtml" />
+    <Content Include="Views\BTWs\Delete.cshtml" />
+    <Content Include="Views\BTWs\Edit.cshtml" />
+    <Content Include="Views\BTWs\Index.cshtml" />
+    <Content Include="Views\Brandstof\Create.cshtml" />
+    <Content Include="Views\Brandstof\Delete.cshtml" />
+    <Content Include="Views\Brandstof\Edit.cshtml" />
+    <Content Include="Views\Brandstof\Index.cshtml" />
+    <Content Include="Views\AutoVeruringsOverizht\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
