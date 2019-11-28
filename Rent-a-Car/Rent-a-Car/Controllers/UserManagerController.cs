@@ -29,6 +29,10 @@ namespace Rent_a_Car.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
             AspNetUsers aspNetUsers = db.AspNetUsers.Find(id);
+            if (aspNetUsers.LockoutEndDateUtc != null)
+            {
+                aspNetUsers.Lockout = true;
+            }
             if (aspNetUsers == null)
             {
                 return HttpNotFound();
@@ -45,6 +49,10 @@ namespace Rent_a_Car.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
             AspNetUsers aspNetUsers = db.AspNetUsers.Find(id);
+            if (aspNetUsers.LockoutEndDateUtc != null)
+            {
+                aspNetUsers.Lockout = true;
+            }
             if (aspNetUsers == null)
             {
                 return HttpNotFound();
@@ -57,15 +65,45 @@ namespace Rent_a_Car.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,Voornaam,Tussenvoegsel,Achternaam,Geboortedatum,Straat,Huisnummer,Toevoeging,PostCode,Plaats,Provincie,Land,Email,EmailConfirmed,PasswordHash,SecurityStamp,PhoneNumber,PhoneNumberConfirmed,TwoFactorEnabled,LockoutEndDateUtc,LockoutEnabled,AccessFailedCount,UserName")] AspNetUsers aspNetUsers, bool Lockout)
+        public ActionResult Edit([Bind(Include = "Id,Voornaam,Tussenvoegsel,Achternaam,Geboortedatum,Straat,Huisnummer,Toevoeging,PostCode,Plaats,Provincie,Land,Email,EmailConfirmed,PhoneNumber,TwoFactorEnabled,UserName,Lockout")] AspNetUsers aspNetUsersData)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(aspNetUsers).State = EntityState.Modified;
+                var newAspNetUsers = db.AspNetUsers.Find(aspNetUsersData.Id);
+
+                newAspNetUsers.Voornaam = aspNetUsersData.Voornaam;
+                newAspNetUsers.Tussenvoegsel = aspNetUsersData.Tussenvoegsel;
+                newAspNetUsers.Achternaam = aspNetUsersData.Achternaam;
+                newAspNetUsers.Geboortedatum = aspNetUsersData.Geboortedatum;
+
+                newAspNetUsers.PhoneNumber = aspNetUsersData.PhoneNumber;
+                newAspNetUsers.Email = aspNetUsersData.Email;
+                newAspNetUsers.EmailConfirmed = aspNetUsersData.EmailConfirmed;
+
+                newAspNetUsers.TwoFactorEnabled = aspNetUsersData.TwoFactorEnabled;
+                newAspNetUsers.UserName = aspNetUsersData.UserName;
+
+                newAspNetUsers.Land = aspNetUsersData.Land;
+                newAspNetUsers.Provincie = aspNetUsersData.Provincie;
+                newAspNetUsers.Plaats = aspNetUsersData.Plaats;
+                newAspNetUsers.PostCode = aspNetUsersData.PostCode;
+                newAspNetUsers.Straat = aspNetUsersData.Straat;
+                newAspNetUsers.Huisnummer = aspNetUsersData.Huisnummer;
+                newAspNetUsers.Toevoeging = aspNetUsersData.Toevoeging;
+
+                if (aspNetUsersData.Lockout)
+                {
+                    newAspNetUsers.LockoutEndDateUtc = DateTime.MaxValue;
+                }
+                else
+                {
+                    newAspNetUsers.LockoutEndDateUtc = null;
+                }
+                db.Entry(newAspNetUsers).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            return View(aspNetUsers);
+            return View(aspNetUsersData);
         }
 
         // GET: UserManager/Delete/5
