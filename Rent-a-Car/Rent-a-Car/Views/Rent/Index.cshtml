@@ -3,19 +3,34 @@
     ViewBag.Title = "Index";
 }
 <link href="~/Content/RentCars.css" rel="stylesheet" />
+<style>
+    .grow {
+        transition: all .2s ease-in-out;
+    }
 
+        .grow:hover {
+            transform: scale(1.1);
+        }
+</style>
 
-<div class="container" style="padding-top: 100px">
-    <h2>Index</h2>
-    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum vitae augue viverra, pellentesque eros eget, luctus lacus. Etiam sit amet ipsum et dolor suscipit pulvinar et id justo. Phasellus quis consectetur ligula. Cras commodo nibh orci, vel ultrices ex pharetra nec. Vivamus metus purus, varius nec orci sagittis, aliquet eleifend sapien. Etiam eu sapien eget erat tincidunt lobortis. Praesent eleifend tristique tortor vel rutrum. Mauris ut fringilla ligula. Sed posuere enim sit amet ligula sollicitudin, vel aliquet libero ultrices. Cras non facilisis arcu, nec mattis magna. Morbi vitae lorem vestibulum, sagittis libero quis, fringilla massa. Nullam a feugiat nisl, eget faucibus ex. Mauris a semper quam.</p>
+<div class="container" style="padding-top: 100px;">
+    <h2>Beschikbare Auto's</h2>
+        <div class="input-group mb-3">
+            <div class="input-group-prepend">
+                <span class="input-group-text">Zoek</span>
+            </div>
+            <input type="text" id="Search" class="form-control" onkeyup="myFunction()" placeholder="Zoek een auto.." title="Type in a name">
+        </div>
+
+    <hr />
     <div class="row">
         @{
             foreach (var autotype in Model)
             {
 
-                <div class="col-md-6 col-lg-4">
+                <div class="col-md-6 col-lg-4 target">
                     <a href="javascript:showmodal('#modal-@autotype.ID')" style="color: black !important">
-                        <div class="card" style="margin: 10px;">
+                        <div class="card grow shadow " style="margin: 10px;">
                             @{
                                 if (autotype.Foto != null && autotype.Foto.Length > 0)
                                 {
@@ -64,7 +79,7 @@
                     <!-- Modal body -->
                     <div class="modal-body">
                         <div class="row" style="width: 100%">
-                            <div class="col-md-3">
+                            <div class="col-md-4">
                                 @{
                                     if (autotype.Foto != null && autotype.Foto.Length > 0)
                                     {
@@ -80,7 +95,7 @@
                                     }
                                 }
                             </div>
-                            <div class="col-md-9">
+                            <div class="col-md-8">
                                 <h5>Auto Eigenschapen</h5>
                                 <div class="row">
                                     <div class="col-md-6">
@@ -155,15 +170,27 @@
                                         </div>
                                     </div>
                                 </div>
+                                <div class="row">
+                                    <div class="col">
+                                        <h3>Prijs Per dag: @String.Format("{0:C}", autotype.AutoPrijs.Where(t => t.AutoTypeID == autotype.ID && DateTime.Now > t.StartDatum && t.EindDatum == null).First().Prijs)</h3>
+                                    </div>
+                                    <div class="col">
+                                        <br />
+                                        <a href="/shoppingcard/addtocard/@autotype.ID" class="btn btn-primary" style="float: right">Toevoegen aan mijn autos</a>
+                                    </div>
+                                </div>
+                                
+                                
 
                             </div>
-                            <a href="/shoppingcard/addtocard/@autotype.ID" class="btn btn-primary" style="margin: auto;">Toevoegen aan mijn autos</a>
+
 
                         </div>
 
-                        
+
 
                     </div>
+
 
 
                 </div>
@@ -179,6 +206,20 @@
     <script>
         function showmodal(id) {
             $(id).modal()
+        }
+
+        function myFunction() {
+            var input = document.getElementById("Search");
+            var filter = input.value.toLowerCase();
+            var nodes = document.getElementsByClassName('target');
+
+            for (i = 0; i < nodes.length; i++) {
+                if (nodes[i].innerText.toLowerCase().includes(filter)) {
+                    nodes[i].style.display = "block";
+                } else {
+                    nodes[i].style.display = "none";
+                }
+            }
         }
     </script>
 

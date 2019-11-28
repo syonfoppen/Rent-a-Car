@@ -81,7 +81,7 @@ namespace Rent_a_Car.Controllers
                 newAspNetUsers.EmailConfirmed = aspNetUsersData.EmailConfirmed;
 
                 newAspNetUsers.TwoFactorEnabled = aspNetUsersData.TwoFactorEnabled;
-                newAspNetUsers.UserName = aspNetUsersData.UserName;
+                newAspNetUsers.UserName = aspNetUsersData.Email;
 
                 newAspNetUsers.Land = aspNetUsersData.Land;
                 newAspNetUsers.Provincie = aspNetUsersData.Provincie;

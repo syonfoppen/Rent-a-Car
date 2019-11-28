@@ -2,76 +2,214 @@
 @{
     ViewBag.Title = "Home";
 }
+    <style>
+        .grow {
+            transition: all .2s ease-in-out;
+        }
 
+            .grow:hover {
+                transform: scale(1.1);
+            }
+    </style>
 <header class="bg-primary text-white text-center" style="margin-top: 80px; background-color: rgb(255,255,255)!important;">
     <div class="container">
         <h1 style="color: rgb(0,0,0) !important;">RENT-A-CAR</h1>
         <h2 class="font-weight-light mb-0" style="color: rgb(0,0,0) !important;">0548-57482950</h2><img class="img-fluid d-block mx-auto mb-5" src="../assets/img/3-cars.png">
     </div>
+
 </header>
 <section id="about" class="bg-primary text-white" style="background-color: #283655 !important;">
     <div class="container">
         <h2 class="text-uppercase text-center text-white">TOP VERHUURDE AUTO'S</h2>
         <hr>
         <div class="row">
-            @{
-                foreach (var item in Model)
-                {
-                    <div class="col-lg-4 ml-auto">
-                        <div class="card">
-                            @{
-                                if (item.Foto != null && item.Foto.Length > 0)
-                                {
+            <div class="row">
+                @{
+                    foreach (var autotype in Model)
+                    {
 
-                                    var base64 = Convert.ToBase64String(item.Foto);
-                                    var imgSrc = String.Format("data:image;base64,{0}", base64);
+                        <div class="col-md-6 col-lg-4 target">
+                            <a href="javascript:showmodal('#modal-@autotype.ID')" style="color: black !important">
+                                <div class="card grow shadow " style="margin: 10px;">
+                                    @{
+                                        if (autotype.Foto != null && autotype.Foto.Length > 0)
+                                        {
 
-                                    <img src="@imgSrc" class="card-img-top" style="width: 100%; height: 200px;" />
+                                            var base64 = Convert.ToBase64String(autotype.Foto);
+                                            var imgSrc = String.Format("data:image;base64,{0}", base64);
+
+                                            <img src="@imgSrc" class="card-img-top" style="width: 100%; height: 200px;" />
+                                        }
+                                        else
+                                        {
+                                            <img src="~/Content/Placeholder_car.jpg" class="card-img-top" style="width: 100%; height: 200px;" />
+                                        }
+
+                                    }
+                                    <div class="card-body">
+                                        <b>@autotype.Merk @autotype.Type - @autotype.Uitvoering</b><br />
+
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+
+
+
+
+                    }
+                }
+            </div>
+        </div>
+    </div>
+
+</section>
+@{
+    foreach (var autotype in Model)
+    {
+        <!-- The Modal -->
+        <div class="modal fade" id="modal-@autotype.ID">
+            <div class="modal-dialog modal-xl">
+                <div class="modal-content">
+
+                    <!-- Modal Header -->
+                    <div class="modal-header">
+                        <h4 class="modal-title">@autotype.Merk @autotype.Type - @autotype.Uitvoering</h4>
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    </div>
+
+                    <!-- Modal body -->
+                    <div class="modal-body">
+                        <div class="row" style="width: 100%">
+                            <div class="col-md-4">
+                                @{
+                                    if (autotype.Foto != null && autotype.Foto.Length > 0)
+                                    {
+
+                                        var base64 = Convert.ToBase64String(autotype.Foto);
+                                        var imgSrc = String.Format("data:image;base64,{0}", base64);
+
+                                        <img src="@imgSrc" class="card-img-top" style="width: 100%; height: 200px;" />
+                                    }
+                                    else
+                                    {
+                                        <img src="~/Content/Placeholder_car.jpg" class="card-img-top" style="width: 100%; height: 200px;" />
+                                    }
                                 }
-                                else
-                                {
-                                    <img src="~/Content/Placeholder_car.jpg" class="card-img-top" style="width: 100%; height: 200px;" />
-                                }
-
-                            }
-                            <div class="card-body">
-                                <b class="card-title text-center" style="color: rgb(0,0,0);">@item.Merk @item.Type - @item.Uitvoering</b>
-                                <div class="row" style="color: black !important;">
-                                    <div class="col-md-12">
+                            </div>
+                            <div class="col-md-8">
+                                <h5>Auto Eigenschapen</h5>
+                                <div class="row">
+                                    <div class="col-md-6">
                                         <div class="row">
-                                            <div class="col-md-6">
+                                            <div class="col-md">
                                                 <b>LaadRuimte: </b>
                                             </div>
                                             <div class="col-md">
-                                                @item.LaadRuimte L
+                                                @autotype.LaadRuimte L
                                             </div>
                                         </div>
                                         <div class="row">
-                                            <div class="col-md-6">
+                                            <div class="col-md">
                                                 <b>Schakeltiepe: </b>
                                             </div>
-                                            <div class="col-md-6">
-                                                @item.SchakelType.Schakeltype1
+                                            <div class="col-md">
+                                                @autotype.SchakelType.Schakeltype1
                                             </div>
                                         </div>
                                         <div class="row">
-                                            <div class="col-md-6">
+                                            <div class="col-md">
                                                 <b>Zitplaatsen: </b>
                                             </div>
-                                            <div class="col-md-6">
-                                                @item.ZitPlaatsen
+                                            <div class="col-md">
+                                                @autotype.ZitPlaatsen
                                             </div>
                                         </div>
 
                                     </div>
+                                    <div class="col-md-6">
+                                        <div class="row">
+                                            <div class="col-md">
+                                                <b>Trekhaak: </b>
+                                            </div>
+                                            <div class="col-md">
+                                                @{
+                                                    if (autotype.Trekhaak)
+                                                    {
+                                                        <text>Ja</text>
+                                                    }
+                                                    else
+                                                    {
+                                                        <text>Nee</text>
+                                                    }
+                                                }
+                                            </div>
 
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md">
+                                                <b>Brandstof: </b>
+                                            </div>
+                                            <div class="col-md">
+                                                @autotype.Brandstof.BrandstofType
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md">
+                                                <b>Gewicht: </b>
+                                            </div>
+                                            <div class="col-md">
+                                                @autotype.Gewicht KG
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md">
+                                                <b>Aantal deuren: </b>
+                                            </div>
+                                            <div class="col-md">
+                                                @autotype.AantalDeuren
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
+                                <div class="row">
+                                    <div class="col">
+                                        <h3>Prijs Per dag: @String.Format("{0:C}", autotype.AutoPrijs.Where(t => t.AutoTypeID == autotype.ID && DateTime.Now > t.StartDatum && t.EindDatum == null).First().Prijs)</h3>
+                                    </div>
+                                    <div class="col">
+                                        <br />
+                                        <a href="/shoppingcard/addtocard/@autotype.ID" class="btn btn-primary" style="float: right">Toevoegen aan mijn autos</a>
+                                    </div>
+                                </div>
+
+
+
                             </div>
+
+
                         </div>
 
+
+
                     </div>
-                                }
-                                }
+
+
+
+                </div>
             </div>
         </div>
-        </section>
+    }
+}
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    @Scripts.Render("~/bundles/jquery")
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+
+    <script>
+        function showmodal(id) {
+            $(id).modal()
+        }
+    </script>
+
+}

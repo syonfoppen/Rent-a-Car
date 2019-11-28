@@ -70,13 +70,13 @@ namespace Rent_a_Car.Models
         [Display(Name = "Email")]
         public string Email { get; set; }
 
-        [Required]
+
         [StringLength(100, ErrorMessage = "Het {0} moet ten minste {2} karakters lang zijn.", MinimumLength = 6)]
         [DataType(DataType.Password)]
         [Display(Name = "huidig Wachtwoord")]
         public string ProfileCurrentPassword { get; set; }
 
-        [Required]
+
         [StringLength(100, ErrorMessage = "Het {0} moet ten minste {2} karakters lang zijn.", MinimumLength = 6)]
         [DataType(DataType.Password)]
         [Display(Name = "nieuw Wachtwoord")]
@@ -104,7 +104,7 @@ namespace Rent_a_Car.Models
         [Display(Name = "Voornaam")]
         public string Voornaam { get; set; }
 
-        [Required]
+
         [Display(Name = "Tussenvoegsel")]
         public string Tussenvoegsel { get; set; }
 
@@ -131,7 +131,7 @@ namespace Rent_a_Car.Models
         [Display(Name = "Huis nummer")]
         public int Huisnummer { get; set; }
 
-        [Required]
+
         [Display(Name = "Toevoeging")]
         public string Toevoeging { get; set; }
 

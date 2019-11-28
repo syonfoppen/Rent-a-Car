@@ -184,11 +184,11 @@
     <Compile Include="Controllers\AutoTypesController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="Controllers\MijnVerhuringenController.cs" />
+    <Compile Include="Controllers\ProfileController.cs" />
     <Compile Include="Controllers\RentController.cs" />
     <Compile Include="Controllers\ShoppingCardController.cs" />
-    <Compile Include="Controllers\ProfileController.cs" />
     <Compile Include="Controllers\UserManagerController.cs" />
-    <Compile Include="Controllers\ViewHiresController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -320,6 +320,7 @@
     <Content Include="Content\bootstrap-reboot.css.map" />
     <Content Include="Content\bootstrap-grid.min.css.map" />
     <Content Include="Content\bootstrap-grid.css.map" />
+    <Content Include="Controllers\AccountController.cs.bak" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
     <Content Include="Scripts\jquery-3.4.1.min.js" />
@@ -385,18 +386,20 @@
     <Content Include="Views\AutoTypes\Edit.cshtml" />
     <Content Include="Views\AutoTypes\Index.cshtml" />
     <Content Include="Views\Autos\Create.cshtml" />
-    <Content Include="Views\Autos\Details.cshtml" />
     <Content Include="Views\Autos\Edit.cshtml" />
     <Content Include="Views\Autos\Index.cshtml" />
     <Content Include="Views\Profile\Index.cshtml" />
-    <Content Include="Views\ViewHires\Index.cshtml" />
     <Content Include="Views\Shared\_layoutAdmin.cshtml" />
     <Content Include="Views\Admin\Index.cshtml" />
-	    <Content Include="Views\UserManager\Details.cshtml" />
+    <Content Include="Views\UserManager\Details.cshtml" />
     <Content Include="Views\UserManager\Edit.cshtml" />
     <Content Include="Views\UserManager\Index.cshtml" />
-	    <Content Include="Views\Rent\Index.cshtml" />
+    <Content Include="Views\Rent\Index.cshtml" />
     <Content Include="Views\ShoppingCard\Index.cshtml" />
+    <Content Include="Views\MijnVerhuringen\Details.cshtml" />
+    <Content Include="Views\MijnVerhuringen\Index.cshtml" />
+    <Content Include="Views\MijnVerhuringen\Print.cshtml" />
+    <Content Include="Views\Shared\Info.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

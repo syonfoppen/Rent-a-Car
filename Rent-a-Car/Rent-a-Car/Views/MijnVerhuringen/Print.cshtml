@@ -1,0 +1,196 @@
+﻿@using Rent_a_Car.Models
+@using System.Linq;
+@model Verhuring
+@{
+    Entities db = new Entities();
+    ViewBag.Title = "PrintFactuur";
+    Layout = null;
+
+    TimeSpan huring = Model.EindDatum - Model.StartDatum;
+}
+@{
+    List<AutoType> autoTypeslist = new List<AutoType>();
+
+    foreach (var item in Model.Auto)
+    {
+        autoTypeslist.Add(item.AutoType);
+    }
+    Dictionary<AutoType, int> filteredautoTypes = autoTypeslist.GroupBy(t => t.ID).ToDictionary(t => t.First(), y => y.Count());
+}
+
+<link href="~/Content/bootstrap.css" rel="stylesheet" />
+<link href="~/Content/Printbooking.css" rel="stylesheet" />
+
+<script>
+
+     window.print();
+     window.onafterprint = function(){
+         window.history.back();
+    }
+     </script>
+
+<h1>Rent-A-Car</h1>
+<h2>Factuur #@Model.ID</h2>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                Persoons gegevens
+            </th>
+            <th>
+                Addres
+            </th>
+            <th>
+                Contact
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>
+                <div class="row">
+                    <div class="col-sm-6">Voornaam: </div>
+                    <div class="col-sm-6">@Model.AspNetUsers.Voornaam</div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-6">Tussenvoegsel: </div>
+                    <div class="col-sm-6">@Model.AspNetUsers.Tussenvoegsel</div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-6">Achternaam: </div>
+                    <div class="col-sm-6">@Model.AspNetUsers.Achternaam</div>
+                </div>
+            </td>
+            <td>
+                <div class="row">
+                    <div class="col-sm-6">Adres: </div>
+                    <div class="col-sm-6">@Model.AspNetUsers.Straat @Model.AspNetUsers.Huisnummer</div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-6">Stad: </div>
+                    <div class="col-sm-6">@Model.AspNetUsers.Plaats</div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-6">Postcode: </div>
+                    <div class="col-sm-6">@Model.AspNetUsers.PostCode</div>
+                </div>
+            </td>
+            <td>
+                <div class="row">
+                    <div class="col-sm-4">Telefoon: </div>
+                    <div class="col-sm-4">@Model.AspNetUsers.PhoneNumber</div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-4">Email: </div>
+                    <div class="col-sm-4">@Model.AspNetUsers.Email</div>
+                </div>
+            </td>
+        </tr>
+    </tbody>
+</table>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                Huring Details
+            </th>
+        </tr>
+
+    </thead>
+    <tbody>
+        <tr>
+            <td>
+                <div class="row">
+                    <div class="col-sm-4">Start Datum: </div>
+                    <div class="col-sm-4">@Model.StartDatum.ToString("dd-MM-yyyy")</div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-4">Eind Datum: </div>
+                    <div class="col-sm-4">@Model.EindDatum.ToString("dd-MM-yyyy")</div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-4">Aantal Dagen: </div>
+                    <div class="col-sm-4">@huring.Days</div>
+                </div>
+            </td>
+        </tr>
+    </tbody>
+</table>
+<hr />
+<h2>Gehuurde Autos</h2>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                Model
+            </th>
+            <th>
+                Aantal
+            </th>
+            <th>
+                Kentekens
+            </th>
+            <th>
+                Prijs Per dag
+            </th>
+            <th>
+                Totaal Prijs
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in filteredautoTypes)
+        {
+        <tr>
+            <td>
+                @item.Key.Merk @item.Key.Type - @item.Key.Uitvoering
+            </td>
+            <td>
+                @item.Value
+            </td>
+            <td>
+                @foreach (var auto in Model.Auto.Where(t => t.AutoTypeID == item.Key.ID))
+                {
+                    @auto.Kenteken <br />
+                }
+            </td>
+            <td>
+                @String.Format("{0:C}",db.spGetAutoPrice(Model.StartDatum, item.Key.ID).First() )
+            </td>
+            <td>
+                @String.Format("{0:C}",(db.spGetAutoPrice(Model.StartDatum, item.Key.ID).First() * huring.Days))
+            </td>
+        </tr>
+        }
+    </tbody>
+    <tfoot>
+        <tr>
+            <td>
+            </td>
+            <td>
+            </td>
+            <td>
+            </td>
+            <td>
+                <b>Totaal excl BTW:</b>
+            </td>
+            <td>
+                @String.Format("{0:C}", Model.Prijs)
+            </td>
+        </tr>
+        <tr>
+            <td>
+            </td>
+            <td>
+            </td>
+            <td>
+            </td>
+            <td>
+                <b>Totaal incl BTW:</b>
+            </td>
+            <td>
+                @String.Format("{0:C}", Model.Prijs * 1.21m)
+            </td>
+        </tr>
+    </tfoot>
+</table>

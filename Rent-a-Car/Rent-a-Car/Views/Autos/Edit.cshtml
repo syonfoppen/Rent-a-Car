@@ -31,7 +31,15 @@
                             <div class="form-row form-group">
                                 <div class="col-sm-4 label-column"><label class="col-form-label" for="name-input-field" style="color: rgb(255,255,255);">AutoType</label></div>
                                 <div class="col-sm-6 offsetInput input-column">
-                                    @Html.DropDownList("AutoTypeID", null, htmlAttributes: new { @class = "form-control" })
+                                    <input type="text" name="AutoTypeID" list="AutoTypeID" class="form-control">
+                                    <datalist name="AutoTypeID" id="AutoTypeID">
+                                        @{
+                                            foreach (var auto in ViewBag.AutoType)
+                                            {
+                                                <option value="@auto.ID">@auto.Merk @auto.Type @auto.Uitvoering</option>
+                                            }
+                                        }
+                                    </datalist>
                                     @Html.ValidationMessageFor(model => model.AutoTypeID, "", new { @class = "text-danger" })
                                 </div>
                             </div>
