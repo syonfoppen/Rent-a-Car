@@ -2,6 +2,7 @@
 
 @{
     ViewBag.Title = "Index";
+        Layout = "~/Views/Shared/_layoutAdmin.cshtml";
 }
 
 <h2>Index</h2>
@@ -44,6 +45,7 @@
         <th>
             @Html.DisplayNameFor(model => model.SchakelType.Schakeltype1)
         </th>
+        <th>Prijs Per dag</th>
         <th></th>
     </tr>
 
@@ -83,9 +85,11 @@
             @Html.DisplayFor(modelItem => item.SchakelType.Schakeltype1)
         </td>
         <td>
+            @Math.Round(item.AutoPrijs.Where(t => t.AutoTypeID == item.ID && DateTime.Now > t.StartDatum && t.EindDatum == null).First().Prijs, 2)
+        </td>
+        <td>
             @Html.ActionLink("Edit", "Edit", new { id=item.ID }) |
-            @Html.ActionLink("Details", "Details", new { id=item.ID }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.ID })
+            @Html.ActionLink("Details", "Details", new { id=item.ID })
         </td>
     </tr>
 }

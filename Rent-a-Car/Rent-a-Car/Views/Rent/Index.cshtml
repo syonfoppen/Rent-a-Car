@@ -2,18 +2,19 @@
 @{
     ViewBag.Title = "Index";
 }
-    <link href="~/Content/RentCars.css" rel="stylesheet" />
+<link href="~/Content/RentCars.css" rel="stylesheet" />
 
 
-    <div class="container">
-        <h2>Index</h2>
-        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum vitae augue viverra, pellentesque eros eget, luctus lacus. Etiam sit amet ipsum et dolor suscipit pulvinar et id justo. Phasellus quis consectetur ligula. Cras commodo nibh orci, vel ultrices ex pharetra nec. Vivamus metus purus, varius nec orci sagittis, aliquet eleifend sapien. Etiam eu sapien eget erat tincidunt lobortis. Praesent eleifend tristique tortor vel rutrum. Mauris ut fringilla ligula. Sed posuere enim sit amet ligula sollicitudin, vel aliquet libero ultrices. Cras non facilisis arcu, nec mattis magna. Morbi vitae lorem vestibulum, sagittis libero quis, fringilla massa. Nullam a feugiat nisl, eget faucibus ex. Mauris a semper quam.</p>
-        <div class="row">
-            @{
-                foreach (var autotype in Model)
-                {
+<div class="container" style="padding-top: 100px">
+    <h2>Index</h2>
+    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum vitae augue viverra, pellentesque eros eget, luctus lacus. Etiam sit amet ipsum et dolor suscipit pulvinar et id justo. Phasellus quis consectetur ligula. Cras commodo nibh orci, vel ultrices ex pharetra nec. Vivamus metus purus, varius nec orci sagittis, aliquet eleifend sapien. Etiam eu sapien eget erat tincidunt lobortis. Praesent eleifend tristique tortor vel rutrum. Mauris ut fringilla ligula. Sed posuere enim sit amet ligula sollicitudin, vel aliquet libero ultrices. Cras non facilisis arcu, nec mattis magna. Morbi vitae lorem vestibulum, sagittis libero quis, fringilla massa. Nullam a feugiat nisl, eget faucibus ex. Mauris a semper quam.</p>
+    <div class="row">
+        @{
+            foreach (var autotype in Model)
+            {
 
-                    <div class="col-md-6 col-lg-4">
+                <div class="col-md-6 col-lg-4">
+                    <a href="javascript:showmodal('#modal-@autotype.ID')" style="color: black !important">
                         <div class="card" style="margin: 10px;">
                             @{
                                 if (autotype.Foto != null && autotype.Foto.Length > 0)
@@ -22,30 +23,163 @@
                                     var base64 = Convert.ToBase64String(autotype.Foto);
                                     var imgSrc = String.Format("data:image;base64,{0}", base64);
 
-                                    <img src="@imgSrc" class="card-img-top" style="width: 100%; height: 150px;" />
+                                    <img src="@imgSrc" class="card-img-top" style="width: 100%; height: 200px;" />
                                 }
                                 else
                                 {
-                                    <img src="~/Content/Placeholder_car.jpg" class="card-img-top" style="width: 100%; height: 150px;" />
+                                    <img src="~/Content/Placeholder_car.jpg" class="card-img-top" style="width: 100%; height: 200px;" />
                                 }
 
                             }
                             <div class="card-body">
                                 <b>@autotype.Merk @autotype.Type - @autotype.Uitvoering</b><br />
-                                Laadruimte: @autotype.LaadRuimte L  <br />
-                                Aantal Deuren: @autotype.AantalDeuren <br />
-                                Schakel type: @autotype.SchakelType.Schakeltype1
-
-                                <a href="/ShoppingCard/AddToCard/@autotype.ID">Add to card</a>
 
                             </div>
                         </div>
+                    </a>
+                </div>
+
+
+
+
+            }
+        }
+    </div>
+</div>
+
+@{
+    foreach (var autotype in Model)
+    {
+        <!-- The Modal -->
+        <div class="modal fade" id="modal-@autotype.ID">
+            <div class="modal-dialog modal-xl">
+                <div class="modal-content">
+
+                    <!-- Modal Header -->
+                    <div class="modal-header">
+                        <h4 class="modal-title">@autotype.Merk @autotype.Type - @autotype.Uitvoering</h4>
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    </div>
+
+                    <!-- Modal body -->
+                    <div class="modal-body">
+                        <div class="row" style="width: 100%">
+                            <div class="col-md-3">
+                                @{
+                                    if (autotype.Foto != null && autotype.Foto.Length > 0)
+                                    {
+
+                                        var base64 = Convert.ToBase64String(autotype.Foto);
+                                        var imgSrc = String.Format("data:image;base64,{0}", base64);
+
+                                        <img src="@imgSrc" class="card-img-top" style="width: 100%; height: 200px;" />
+                                    }
+                                    else
+                                    {
+                                        <img src="~/Content/Placeholder_car.jpg" class="card-img-top" style="width: 100%; height: 200px;" />
+                                    }
+                                }
+                            </div>
+                            <div class="col-md-9">
+                                <h5>Auto Eigenschapen</h5>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="row">
+                                            <div class="col-md">
+                                                <b>LaadRuimte: </b>
+                                            </div>
+                                            <div class="col-md">
+                                                @autotype.LaadRuimte L
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md">
+                                                <b>Schakeltiepe: </b>
+                                            </div>
+                                            <div class="col-md">
+                                                @autotype.SchakelType.Schakeltype1
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md">
+                                                <b>Zitplaatsen: </b>
+                                            </div>
+                                            <div class="col-md">
+                                                @autotype.ZitPlaatsen
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="row">
+                                            <div class="col-md">
+                                                <b>Trekhaak: </b>
+                                            </div>
+                                            <div class="col-md">
+                                                @{
+                                                    if (autotype.Trekhaak)
+                                                    {
+                                                        <text>Ja</text>
+                                                    }
+                                                    else
+                                                    {
+                                                        <text>Nee</text>
+                                                    }
+                                                }
+                                            </div>
+
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md">
+                                                <b>Brandstof: </b>
+                                            </div>
+                                            <div class="col-md">
+                                                @autotype.Brandstof.BrandstofType
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md">
+                                                <b>Gewicht: </b>
+                                            </div>
+                                            <div class="col-md">
+                                                @autotype.Gewicht KG
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md">
+                                                <b>Aantal deuren: </b>
+                                            </div>
+                                            <div class="col-md">
+                                                @autotype.AantalDeuren
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                            <a href="/shoppingcard/addtocard/@autotype.ID" class="btn btn-primary" style="margin: auto;">Toevoegen aan mijn autos</a>
+
+                        </div>
+
+                        
+
                     </div>
 
 
-
-
-                }
-            }
+                </div>
+            </div>
         </div>
-    </div>
+    }
+}
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    @Scripts.Render("~/bundles/jquery")
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+
+    <script>
+        function showmodal(id) {
+            $(id).modal()
+        }
+    </script>
+
+}

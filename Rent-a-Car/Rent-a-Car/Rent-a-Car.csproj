@@ -179,6 +179,7 @@
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Classes\Mailer.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\AdminController.cs" />
     <Compile Include="Controllers\AutosController.cs" />
     <Compile Include="Controllers\AutoTypesController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -186,6 +187,7 @@
     <Compile Include="Controllers\RentController.cs" />
     <Compile Include="Controllers\ShoppingCardController.cs" />
     <Compile Include="Controllers\ProfileController.cs" />
+    <Compile Include="Controllers\ViewHiresController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -195,6 +197,7 @@
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
+    <Compile Include="Models\AdminViewModel.cs" />
     <Compile Include="Models\Auto.cs">
       <DependentUpon>DatabaseModels.tt</DependentUpon>
     </Compile>
@@ -237,6 +240,15 @@
     <Compile Include="Startup.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="adminassets\bootstrap\css\bootstrap.min.css" />
+    <Content Include="adminassets\img\avatars\avatar1.jpeg" />
+    <Content Include="adminassets\img\avatars\avatar2.jpeg" />
+    <Content Include="adminassets\img\avatars\avatar3.jpeg" />
+    <Content Include="adminassets\img\avatars\avatar4.jpeg" />
+    <Content Include="adminassets\img\avatars\avatar5.jpeg" />
+    <Content Include="adminassets\js\bs-charts.js" />
+    <Content Include="adminassets\js\script.min.js" />
+    <Content Include="adminassets\js\theme.js" />
     <Content Include="assets\css\all.css" />
     <Content Include="assets\bootstrap\css\bootstrap.min.css" />
     <Content Include="assets\css\Login-Form-Dark.css" />
@@ -358,16 +370,17 @@
     <Content Include="Scripts\popper-utils.min.js.map" />
     <Content Include="Scripts\popper-utils.js.map" />
     <Content Include="Views\AutoTypes\Create.cshtml" />
-    <Content Include="Views\AutoTypes\Delete.cshtml" />
     <Content Include="Views\AutoTypes\Details.cshtml" />
     <Content Include="Views\AutoTypes\Edit.cshtml" />
     <Content Include="Views\AutoTypes\Index.cshtml" />
     <Content Include="Views\Autos\Create.cshtml" />
-    <Content Include="Views\Autos\Delete.cshtml" />
     <Content Include="Views\Autos\Details.cshtml" />
     <Content Include="Views\Autos\Edit.cshtml" />
     <Content Include="Views\Autos\Index.cshtml" />
     <Content Include="Views\Profile\Index.cshtml" />
+    <Content Include="Views\ViewHires\Index.cshtml" />
+    <Content Include="Views\Shared\_layoutAdmin.cshtml" />
+    <Content Include="Views\Admin\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

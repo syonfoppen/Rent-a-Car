@@ -11,7 +11,8 @@ namespace Rent_a_Car.Models
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel.DataAnnotations;
+
     public partial class Verhuring
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -21,10 +22,14 @@ namespace Rent_a_Car.Models
         }
     
         public int ID { get; set; }
+        [Display(Name = "Start datum")]
         public System.DateTime StartDatum { get; set; }
+        [Display(Name = "Eind datum")]
         public System.DateTime EindDatum { get; set; }
         public string GebruikerID { get; set; }
+        [Display(Name = "Beschrijving")]
         public string Beschrijving { get; set; }
+        [Display(Name = "Prijs")]
         public decimal Prijs { get; set; }
         public bool Geldig { get; set; }
     
