@@ -1,0 +1,54 @@
+﻿@model IEnumerable<Rent_a_Car.Models.Verhuring>
+@using Microsoft.AspNet.Identity;
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Uw gehuurde auto's</h2>
+
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.StartDatum)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.EindDatum)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Beschrijving)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Prijs)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        if (User.IsInRole("Gebruiker") && item.GebruikerID != User.Identity.GetUserId())
+        {
+            continue;
+        }
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.StartDatum)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.EindDatum)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Beschrijving)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Prijs)
+            </td>
+            <td>
+                @Html.ActionLink("Annuleren", "Cancel", new { id = item.ID })
+            </td>
+        </tr>
+    }
+
+</table>

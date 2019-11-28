@@ -17,6 +17,7 @@ namespace Rent_a_Car.Controllers
         // GET: Autos
         public ActionResult Index()
         {
+            
             var auto = db.Auto.Include(a => a.AutoType);
             return View(auto.ToList());
         }
@@ -97,31 +98,6 @@ namespace Rent_a_Car.Controllers
             return View(auto);
         }
 
-        // GET: Autos/Delete/5
-        public ActionResult Delete(int? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            Auto auto = db.Auto.Find(id);
-            if (auto == null)
-            {
-                return HttpNotFound();
-            }
-            return View(auto);
-        }
-
-        // POST: Autos/Delete/5
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(int id)
-        {
-            Auto auto = db.Auto.Find(id);
-            db.Auto.Remove(auto);
-            db.SaveChanges();
-            return RedirectToAction("Index");
-        }
 
         protected override void Dispose(bool disposing)
         {

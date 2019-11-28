@@ -1,4 +1,5 @@
-﻿<!DOCTYPE html>
+﻿@using Microsoft.AspNet.Identity
+<!DOCTYPE html>
 <html>
 <head>
     <meta charset="utf-8" />
@@ -17,19 +18,38 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="assets/css/Login-Form-Dark.css">
 </head>
+
 <body style="padding-bottom: 0px !important;">
     @*Navbar*@
     <nav class="navbar navbar-light navbar-expand-lg fixed-top bg-secondary text-uppercase" id="mainNav" style="background-color: #283655 !important;">
         <div class="container">
-            <a class="navbar-brand js-scroll-trigger" href="~/home">rent-a-car</a><button data-toggle="collapse" data-target="#navbarResponsive" class="navbar-toggler navbar-toggler-right text-uppercase bg-primary text-white rounded" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
-                <i class="fa fa-bars"></i>
-            </button>
+            <a class="navbar-brand js-scroll-trigger" href="~/home">RENT-A-CAR</a><button data-toggle="collapse" data-target="#navbarResponsive" class="navbar-toggler navbar-toggler-right text-uppercase bg-primary text-white rounded" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation"><i class="fa fa-bars"></i></button>
             <div class="collapse navbar-collapse" id="navbarResponsive">
                 <ul class="nav navbar-nav ml-auto">
-                    <li class="nav-item mx-0 mx-lg-1" role="presentation"><a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="~/home">Huur auto</a></li>
-                    <li class="nav-item mx-0 mx-lg-1" role="presentation"><a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="~/account/login">Inloggen</a></li>
-                    <li class="nav-item mx-0 mx-lg-1" role="presentation"><a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="~/home">registreren</a></li>
+                    <li class="nav-item mx-0 mx-lg-1" role="presentation"><a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="~/rent">Huur auto</a></li>
+                    @if (User.IsInRole("Admin") || User.IsInRole("Medewerkers"))
+                    {
+                        <li class="nav-item mx-0 mx-lg-1" role="presentation"><a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger"   href="~/management">Management&nbsp&nbsp</a></li>
+                    }
                 </ul>
+                @Html.Partial("_LoginPartial")
+                @if (User.Identity.IsAuthenticated)
+                {
+                    <span>&nbsp&nbsp&nbsp&nbsp</span>
+                    if (Session["ShoppingCard"] != null)
+                    {
+                        List<Rent_a_Car.Models.AutoType> autoTypeslist = (List<Rent_a_Car.Models.AutoType>)Session["ShoppingCard"];
+                        <a href="/shoppingcard/">
+                            <div class="text-white"><h4 style="font-size: 25px;" class="fas fa-car text-white"></h4>&nbsp @autoTypeslist.Count</div>
+                        </a>
+                    }
+                    else
+                    {
+                        <a href="/mijnautos/">
+                            <div class="text-white"><h4 style="font-size: 25px;" class="fas fa-car text-white"></h4>&nbsp0</div>
+                        </a>
+                    }
+                }
             </div>
         </div>
     </nav>

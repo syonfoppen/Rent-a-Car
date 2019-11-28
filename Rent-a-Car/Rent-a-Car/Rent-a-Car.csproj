@@ -37,6 +37,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <LangVersion>8.0</LangVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -46,6 +47,7 @@
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <LangVersion>8.0</LangVersion>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
@@ -184,6 +186,10 @@
     <Compile Include="Controllers\AutoTypesController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="Controllers\RentController.cs" />
+    <Compile Include="Controllers\ShoppingCardController.cs" />
+    <Compile Include="Controllers\ProfileController.cs" />
+    <Compile Include="Controllers\ViewHiresController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -238,6 +244,7 @@
     <Content Include="assets\css\all.css" />
     <Content Include="assets\bootstrap\css\bootstrap.min.css" />
     <Content Include="assets\css\Login-Form-Dark.css" />
+    <Content Include="assets\css\Pretty-Registration-Form.css" />
     <Content Include="assets\img\3-cars.png" />
     <Content Include="assets\img\login_background.png" />
     <Content Include="assets\js\all.js" />
@@ -248,6 +255,8 @@
     <Content Include="Content\bootstrap-reboot.min.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\RentCars.css" />
+    <Content Include="Content\Placeholder_car.jpg" />
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
@@ -353,15 +362,15 @@
     <Content Include="Scripts\popper-utils.min.js.map" />
     <Content Include="Scripts\popper-utils.js.map" />
     <Content Include="Views\AutoTypes\Create.cshtml" />
-    <Content Include="Views\AutoTypes\Delete.cshtml" />
     <Content Include="Views\AutoTypes\Details.cshtml" />
     <Content Include="Views\AutoTypes\Edit.cshtml" />
     <Content Include="Views\AutoTypes\Index.cshtml" />
     <Content Include="Views\Autos\Create.cshtml" />
-    <Content Include="Views\Autos\Delete.cshtml" />
     <Content Include="Views\Autos\Details.cshtml" />
     <Content Include="Views\Autos\Edit.cshtml" />
     <Content Include="Views\Autos\Index.cshtml" />
+    <Content Include="Views\Profile\Index.cshtml" />
+    <Content Include="Views\ViewHires\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
