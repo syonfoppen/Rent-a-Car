@@ -12,24 +12,18 @@ namespace Rent_a_Car.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class Verhuring
+    public partial class AspNetRoles
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Verhuring()
+        public AspNetRoles()
         {
-            this.Auto = new HashSet<Auto>();
+            this.AspNetUsers = new HashSet<AspNetUsers>();
         }
     
-        public int ID { get; set; }
-        public System.DateTime StartDatum { get; set; }
-        public System.DateTime EindDatum { get; set; }
-        public string GebruikerID { get; set; }
-        public string Beschrijving { get; set; }
-        public decimal Prijs { get; set; }
-        public bool Geldig { get; set; }
+        public string Id { get; set; }
+        public string Name { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Auto> Auto { get; set; }
-        public virtual AspNetUsers AspNetUsers { get; set; }
+        public virtual ICollection<AspNetUsers> AspNetUsers { get; set; }
     }
 }

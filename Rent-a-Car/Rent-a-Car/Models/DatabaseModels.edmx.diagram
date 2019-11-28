@@ -17,6 +17,14 @@
         <AssociationConnector Association="Model.FK_AutoType_Brandstof" />
         <AssociationConnector Association="Model.FK_AutoType_SchakelType" />
         <AssociationConnector Association="Model.VerhuringAutos" />
+        <EntityTypeShape EntityType="Model.AspNetRoles" Width="1.5" PointX="3.375" PointY="11.5" />
+        <EntityTypeShape EntityType="Model.AspNetUserClaims" Width="1.5" PointX="7.875" PointY="12.5" />
+        <EntityTypeShape EntityType="Model.AspNetUserLogins" Width="1.5" PointX="7.875" PointY="10" />
+        <EntityTypeShape EntityType="Model.AspNetUsers" Width="1.5" PointX="5.625" PointY="9.125" />
+        <AssociationConnector Association="Model.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" />
+        <AssociationConnector Association="Model.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" />
+        <AssociationConnector Association="Model.FK_Verhuring_AspNetUsers" />
+        <AssociationConnector Association="Model.AspNetUserRoles" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
