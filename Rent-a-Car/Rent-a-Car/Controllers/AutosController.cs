@@ -37,6 +37,7 @@ namespace Rent_a_Car.Controllers
             return View(auto);
         }
 
+        [Authorize(Roles = "Admin")]
         // GET: Autos/Create
         public ActionResult Create()
         {

@@ -7,6 +7,7 @@ using Rent_a_Car.Models;
 
 namespace Rent_a_Car.Controllers
 {
+    [Authorize(Roles = "Medewerker, Admin")]
     public class AdminController : Controller
     {
         private Entities db = new Entities();

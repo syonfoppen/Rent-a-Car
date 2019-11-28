@@ -2,8 +2,20 @@
 @using Microsoft.AspNet.Identity;
 
 @{
+
+
+
     ViewBag.Title = "Index";
-    Layout = "~/Views/Shared/_Layout.cshtml";
+
+
+    if (User.IsInRole("Admin"))
+    {
+        Layout = "~/Views/Shared/_layoutAdmin.cshtml";
+    }
+    else
+    {
+            Layout = "~/Views/Shared/_Layout.cshtml";
+    }
 }
 
 <h2>Uw gehuurde auto's</h2>
