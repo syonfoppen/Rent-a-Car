@@ -11,10 +11,12 @@ using Rent_a_Car.Models;
 
 namespace Rent_a_Car.Controllers
 {
+
     public class AutoTypesController : Controller
     {
         private Entities db = new Entities();
 
+        [Authorize(Roles = "Admin")]
         // GET: AutoTypes
         public ActionResult Index()
         {
@@ -36,7 +38,7 @@ namespace Rent_a_Car.Controllers
             }
             return View(autoType);
         }
-
+        [Authorize(Roles = "Admin")]
         // GET: AutoTypes/Create
         public ActionResult Create()
         {
@@ -49,6 +51,7 @@ namespace Rent_a_Car.Controllers
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
+        [Authorize(Roles = "Admin")]
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "ID,Merk,Type,LaadRuimte,SchakelTypeID,Trekhaak,ZitPlaatsen,BrandstofID,Gewicht,AantalDeuren,Uitvoering,Beschikbaar,Foto,price,upload")] AutoType autoType, HttpPostedFileBase upload, decimal? price)
         {
@@ -82,6 +85,7 @@ namespace Rent_a_Car.Controllers
         }
 
         // GET: AutoTypes/Edit/5
+        [Authorize(Roles = "Admin")]
         public ActionResult Edit(int? id)
         {
             if (id == null)
@@ -103,7 +107,8 @@ namespace Rent_a_Car.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "ID,Merk,Type,LaadRuimte,SchakelTypeID,Trekhaak,ZitPlaatsen,BrandstofID,Gewicht,AantalDeuren,Uitvoering,Beschikbaar")] AutoType autoType, HttpPostedFileBase upload, decimal? price)
+        [Authorize(Roles = "Admin")]
+        public ActionResult Edit([Bind(Include = "ID,Merk,Type,LaadRuimte,SchakelTypeID,Trekhaak,ZitPlaatsen,BrandstofID,Gewicht,AantalDeuren,Uitvoering,Beschikbaar, Foto")] AutoType autoType, HttpPostedFileBase upload, decimal? price)
         {
             if (ModelState.IsValid)
             {

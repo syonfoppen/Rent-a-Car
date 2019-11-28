@@ -6,48 +6,136 @@
 
 }
 
-<h2>Index</h2>
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.Kenteken)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.BouwJaar)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Beschikbaar)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.AutoType.Merk)
-        </th>
-        <th></th>
-    </tr>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.Kenteken)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.BouwJaar)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Beschikbaar)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.AutoType.Merk)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.AutoID }) |
-            @Html.ActionLink("Details", "Details", new { id=item.AutoID }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.AutoID })
-        </td>
-    </tr>
+<div class="container" style="padding-top: 100px">
+    <div class="card">
+        <div class="card-body">
+            <h2>Autos</h2>
+            <table id="autotable" class="table table-striped table-bordered responsive nowrap" width="100%">
+                <thead>
+                    <tr>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Kenteken)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.BouwJaar)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Beschikbaar)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.AutoType.Merk)
+                        </th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Kenteken)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.BouwJaar)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Beschikbaar)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.AutoType.Merk)
+                            </td>
+                            <td>
+                                @Html.ActionLink("Edit", "Edit", new { id = item.AutoID })
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    @Scripts.Render("~/bundles/jquery")
+
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/bs4/jszip-2.5.0/dt-1.10.20/b-1.6.1/b-colvis-1.6.1/b-html5-1.6.1/b-print-1.6.1/r-2.2.3/datatables.min.css" />
+
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.36/pdfmake.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.36/vfs_fonts.js"></script>
+    <script type="text/javascript" src="https://cdn.datatables.net/v/bs4/jszip-2.5.0/dt-1.10.20/b-1.6.1/b-colvis-1.6.1/b-html5-1.6.1/b-print-1.6.1/r-2.2.3/datatables.min.js"></script>
+
+    <script>
+        $(document).ready(function () {
+
+            $('#autotable').DataTable({
+                dom: 'Bfrtlip',
+                searching: true,
+                paging: true,
+                responsive: true,
+                buttons:
+                    [{
+                        extend: 'collection',
+                        text: 'Export',
+                        buttons: [
+                            {
+                                text: 'Print Table',
+                                extend: 'print',
+
+                            },
+                            {
+                                text: 'Copy Table',
+                                extend: 'copy',
+
+                            },
+                            {
+                                text: 'Download Excel',
+                                extend: 'excel',
+  
+                            }
+                            ,
+                            {
+                                text: 'Download PDF',
+                                extend: 'pdf',
+
+                            }
+                        ]
+                    },
+                    {
+                        text: 'Voeg Nieuw AutoType Toe',
+                        className: 'btn',
+                        action: function (e, dt, node, config) {
+                            window.location.href = "/autos/create";
+                        }
+                        }],
+                 language:{
+    "sProcessing": "Bezig...",
+    "sLengthMenu": "_MENU_ resultaten weergeven",
+    "sZeroRecords": "Geen resultaten gevonden",
+    "sInfo": "_START_ tot _END_ van _TOTAL_ resultaten",
+    "sInfoEmpty": "Geen resultaten om weer te geven",
+    "sInfoFiltered": " (gefilterd uit _MAX_ resultaten)",
+    "sInfoPostFix": "",
+    "sSearch": "Zoeken:",
+    "sEmptyTable": "Geen resultaten aanwezig in de tabel",
+    "sInfoThousands": ".",
+    "sLoadingRecords": "Een moment geduld aub - bezig met laden...",
+    "oPaginate": {
+        "sFirst": "Eerste",
+        "sLast": "Laatste",
+        "sNext": "Volgende",
+        "sPrevious": "Vorige"
+    },
+    "oAria": {
+        "sSortAscending":  ": activeer om kolom oplopend te sorteren",
+        "sSortDescending": ": activeer om kolom aflopend te sorteren"
+    }
 }
 
-</table>
+
+            });
+        });
+    </script>
+}

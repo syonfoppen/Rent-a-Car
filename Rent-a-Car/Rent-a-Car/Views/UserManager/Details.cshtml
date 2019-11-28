@@ -2,154 +2,131 @@
 
 @{
     ViewBag.Title = "Details";
-    Layout = "~/Views/Shared/_Layout.cshtml";
+     Layout = "~/Views/Shared/_layoutAdmin.cshtml";
 }
 
-<h2>Details</h2>
+<div class="container" style="padding-top: 100px">
+    <div class="card">
+        <div class="card-body">
+            <h1>@Model.Voornaam @Model.Tussenvoegsel @Model.Achternaam</h1>
+            <hr />
+            <div class="row">
 
-<div>
-    <h4>AspNetUsers</h4>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.Voornaam)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Voornaam)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Tussenvoegsel)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Tussenvoegsel)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Achternaam)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Achternaam)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Geboortedatum)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Geboortedatum)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Straat)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Straat)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Huisnummer)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Huisnummer)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Toevoeging)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Toevoeging)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.PostCode)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.PostCode)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Plaats)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Plaats)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Provincie)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Provincie)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Land)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Land)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Email)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Email)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.EmailConfirmed)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.EmailConfirmed)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.PhoneNumber)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.PhoneNumber)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.UserName)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.UserName)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.TwoFactorEnabled)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.TwoFactorEnabled)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Lockout)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Lockout)
-        </dd>
-
-    </dl>
+                <div class="col-4">
+                    <h4>Persoons gegevens</h4>
+                    <div class="row">
+                        <div class="col-6">
+                            <b>Voornaam:</b>
+                        </div>
+                        <div class="col-6">
+                            @Model.Voornaam
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-6">
+                            <b>Tussenvoegsel:</b>
+                        </div>
+                        <div class="col-6">
+                            @Model.Tussenvoegsel
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-6">
+                            <b>Achternaam:</b>
+                        </div>
+                        <div class="col-6">
+                            @Model.Achternaam
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-6">
+                            <b>Geboortedatum:</b>
+                        </div>
+                        <div class="col-6">
+                            @DateTime.Parse(Model.Geboortedatum.ToString()).ToString("yyyy-dd-MM")
+                        </div>
+                    </div>
+                </div>
+                <div class="col-4">
+                    <h4>Adres Gegevens</h4>
+                    <div class="row">
+                        <div class="col-6">
+                            <b>Straat:</b>
+                        </div>
+                        <div class="col-6">
+                            @Model.Straat
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-6">
+                            <b>HuisNummer:</b>
+                        </div>
+                        <div class="col-6">
+                            @Model.Straat @Model.Toevoeging
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-6">
+                            <b>PostCode:</b>
+                        </div>
+                        <div class="col-6">
+                            @Model.PostCode
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-6">
+                            <b>Plaats:</b>
+                        </div>
+                        <div class="col-6">
+                            @Model.Plaats
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-6">
+                            <b>Provincie:</b>
+                        </div>
+                        <div class="col-6">
+                            @Model.Provincie
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-6">
+                            <b>Land:</b>
+                        </div>
+                        <div class="col-6">
+                            @Model.Land
+                        </div>
+                    </div>
+                </div>
+                <div class="col-4">
+                    <h4>Contact Gegevens</h4>
+                    <div class="row">
+                        <div class="col-5">
+                            <b>Email:</b>
+                        </div>
+                        <div class="col-7">
+                            @Model.Email
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-5">
+                            <b>Telefoon:</b>
+                        </div>
+                        <div class="col-7">
+                            @Model.PhoneNumber
+                        </div>
+                    </div>
+                </div>
+                <p>
+                    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }, new {@class = "btn btn-primary" })
+                    @Html.ActionLink("Back to List", "Index", new { id = Model.Id }, new {@class = "btn btn-primary" })
+                </p>
+            </div>
+        </div>
+    </div>
 </div>
-<p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
-    @Html.ActionLink("Back to List", "Index")
-</p>
+
+
+
+
+

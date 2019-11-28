@@ -10,6 +10,7 @@ using Rent_a_Car.Models;
 
 namespace Rent_a_Car.Controllers
 {
+    [Authorize(Roles = "Admin")]
     public class AutosController : Controller
     {
         private Entities db = new Entities();
@@ -22,20 +23,7 @@ namespace Rent_a_Car.Controllers
             return View(auto.ToList());
         }
 
-        // GET: Autos/Details/5
-        public ActionResult Details(int? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            Auto auto = db.Auto.Find(id);
-            if (auto == null)
-            {
-                return HttpNotFound();
-            }
-            return View(auto);
-        }
+
 
         // GET: Autos/Create
         public ActionResult Create()
@@ -77,7 +65,7 @@ namespace Rent_a_Car.Controllers
             {
                 return HttpNotFound();
             }
-            ViewBag.AutoTypeID = new SelectList(db.AutoType, "ID", "Merk", auto.AutoTypeID);
+            ViewBag.AutoType = db.AutoType.ToList() ;
             ViewBag.Id = id;
             return View(auto);
         }

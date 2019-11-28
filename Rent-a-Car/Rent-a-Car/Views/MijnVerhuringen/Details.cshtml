@@ -1,0 +1,175 @@
+﻿@model Rent_a_Car.Models.Verhuring
+@using Rent_a_Car.Models
+@using System.Linq;
+
+@{
+    ViewBag.Title = "Details";
+    if (User.IsInRole("Admin") || User.IsInRole("Medewerker"))
+    {
+        Layout = "~/Views/Shared/_layoutAdmin.cshtml";
+    }
+    else
+    {
+        <style>
+            .card a {
+                color: black !important;
+            }
+        </style>
+    }
+}
+@{
+    List<AutoType> autoTypeslist = new List<AutoType>();
+
+    foreach (var item in Model.Auto)
+    {
+        autoTypeslist.Add(item.AutoType);
+    }
+    Dictionary<AutoType, int> filteredautoTypes = autoTypeslist.GroupBy(t => t.ID).ToDictionary(t => t.First(), y => y.Count());
+}
+
+<div class="container" style="padding-top: 100px; padding-bottom: 100px">
+    <div class="card shadow">
+        <div class="card-body">
+            <h1>Huring: #@Model.ID</h1>
+            <hr />
+            <div class="row">
+                <div class="col-md-6">
+                    <h4>Details</h4>
+                    <div class="row">
+                        <div class="col-md">
+                            <b>Naam: </b>
+                        </div>
+                        <div class="col-md">
+                            @Model.AspNetUsers.Voornaam @Model.AspNetUsers.Tussenvoegsel @Model.AspNetUsers.Achternaam
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md">
+                            <b>Start Datum: </b>
+                        </div>
+                        <div class="col-md">
+                            @Model.StartDatum.ToString("dd-MM-yyyy")
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md">
+                            <b>Eind Datum: </b>
+                        </div>
+                        <div class="col-md">
+                            @Model.EindDatum.ToString("dd-MM-yyyy")
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md">
+                            <b>Status: </b>
+                        </div>
+                        <div class="col-md">
+                            @{
+                                if (Model.Geldig == false)
+                                {
+                                    <span>Geanuleerd</span>
+                                }
+                                else if (DateTime.Now >= Model.StartDatum && DateTime.Now <= Model.EindDatum)
+                                {
+                                    <span>Bezig</span>
+                                }
+                                else if (DateTime.Now > Model.EindDatum)
+                                {
+                                    <span>Verlopen</span>
+                                }
+                                else if (DateTime.Now < Model.StartDatum)
+                                {
+                                    <span>Aankomende</span>
+                                }
+
+                            }
+                        </div>
+                    </div>
+
+                </div>
+                <div class="col-md-6">
+                    <h4>Geselecteerde Autos</h4>
+
+                    <table class="table table-striped table-bordered responsive nowrap" width="100%" id="bookingTable">
+                        <thead>
+                            <tr>
+                                <th>
+                                    Auto
+                                </th>
+                                <th>
+                                    Aantal
+                                </th>
+                                <th>
+                                    Kentekens
+                                </th>
+                                <th>
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @{
+                                foreach (var item in filteredautoTypes)
+                                {
+                                    <tr>
+                                        <td>
+                                            @item.Key.Merk @item.Key.Type - @item.Key.Uitvoering
+                                        </td>
+                                        <td>
+                                            @item.Value
+                                        </td>
+                                        <td>
+                                            @foreach (var auto in Model.Auto.Where(t => t.AutoTypeID == item.Key.ID))
+                                            {
+                                                @auto.Kenteken <br />
+                                            }
+                                        </td>
+                                        <td>
+                                            <a href="/autotypes/details/@item.Key.ID">Details</a>
+                                        </td>
+                                    </tr>
+                                }
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <hr />
+            <div class="row">
+                <div class="col-md-6">
+                    <h4>Prijs: @String.Format("{0:C}", Model.Prijs)</h4>
+                </div>
+                <div class="col-md-6" style="text-align: right">
+                    <a href="/MijnVerhuringen/print/@Model.ID" class="btn btn-primary">Print Factuur</a>
+                </div>
+            </div>
+
+            @Html.ActionLink("Back to List", "Index")
+
+        </div>
+    </div>
+</div>
+
+
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    @Scripts.Render("~/bundles/jquery")
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+
+    <script type="text/javascript" src="https://cdn.datatables.net/v/bs4/dt-1.10.20/b-1.6.1/r-2.2.3/datatables.min.js"></script>
+
+    <script src="https://kit.fontawesome.com/11eb072567.js" crossorigin="anonymous"></script>
+    <script>
+        $(document).ready(function () {
+
+            $('#bookingTable').DataTable({
+                paging: false,
+                responsive: true,
+                dom: 't',
+                searching: false
+            });
+        });
+    </script>
+
+
+}

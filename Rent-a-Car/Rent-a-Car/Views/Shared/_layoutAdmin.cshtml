@@ -10,20 +10,32 @@
     <link rel="stylesheet" href="/adminassets/bootstrap/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.1/css/all.css">
+    <style>
+        .make-me-sticky {
+            position: -webkit-sticky !important;
+            position: sticky !important;
+            top: 0 !important;
+            padding: 0 15px !important;
+        }
+    </style>
 </head>
 
 <body id="page-top" style="padding: 0px;">
     <div id="wrapper">
-        <nav class="navbar navbar-dark align-items-start sidebar sidebar-dark accordion bg-gradient-primary p-0">
-            <div class="container-fluid d-flex flex-column p-0">
+        <nav class="navbar navbar-dark align-items-start sidebar sidebar-dark accordion bg-gradient-primary p-0 ">
+            <div class=" make-me-sticky container-fluid d-flex flex-column p-0">
                 <a class="navbar-brand d-flex justify-content-center align-items-center sidebar-brand m-0" href="#">
                     <div class="sidebar-brand-text mx-3"><span>ADMIN</span></div>
                 </a>
                 <hr class="sidebar-divider my-0">
                 <ul class="nav navbar-nav text-light" id="accordionSidebar">
-                    <li class="nav-item" role="presentation"><a class="nav-link active" id="dashboard" href="/admin"><i class="fas fa-tachometer-alt"></i><span>Dashboard</span></a></li>
-                    <li class="nav-item" role="presentation"><a class="nav-link" href="/"><i class="fas fa-home"></i><span>Home</span></a></li>
-                    <li class="nav-item" role="presentation"><a class="nav-link" id="autos" href="/autos"><i class="fas fa-car"></i><span>Autos</span></a></li>
+                    <li class="nav-item" role="presentation"><a class="nav-link" href="/"><i class="fas fa-home"></i><span> Home</span></a></li>
+                    <li class="nav-item" role="presentation"><a class="nav-link" id="dashboard" href="/admin"><i class="fas fa-tachometer-alt"></i><span> Dashboard</span></a></li>
+                    <li class="nav-item" role="presentation"><a class="nav-link" id="gebruikers" href="/usermanager"><i class="fas fa-user"></i><span> Gebruikers</span></a></li>
+                    <li class="nav-item" role="presentation"><a class="nav-link" id="verhuring" href="/mijnverhuringen"><i class="fas fa-book"></i><span> Verhuringen</span></a></li>
+                    <li class="nav-item" role="presentation"><a class="nav-link" id="autos" href="/autos"><i class="fas fa-car"></i><span> Autos</span></a></li>
+                    <li class="nav-item" role="presentation"><a class="nav-link" id="autoTypes" href="/autotypes"><i class="fas fa-car"></i><span> AutoTypes</span></a></li>
+
                 </ul>
                 <div class="text-center d-none d-md-inline"><button class="btn rounded-circle border-0" id="sidebarToggle" type="button"></button></div>
             </div>
@@ -42,6 +54,44 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.4.1/jquery.easing.js"></script>
     <script src="/adminassets/js/theme.js"></script>
     @RenderSection("scripts", required: false)
+    @{
+        var controllerName = string.Empty;
+        object controllerObj;
+
+        if (ViewContext.RouteData.Values.TryGetValue("controller", out controllerObj))
+        {
+            controllerName = controllerObj.ToString();
+
+            <text>
+                <script>
+                    var contoller = '@controllerName';
+                        switch (contoller.toLowerCase()) {
+
+                            case 'admin':
+                                document.getElementById("dashboard").className = "nav-link active";
+                                break;
+
+                            case 'usermanager':
+                                document.getElementById("gebruikers").className = "nav-link active";
+                                break;
+                            case 'mijnverhuringen':
+                                document.getElementById("verhuring").className = "nav-link active";
+                                break;
+                            case 'autos':
+                                document.getElementById("autos").className = "nav-link active";
+                                break;
+                                                        case 'autotypes':
+                                document.getElementById("autoTypes").className = "nav-link active";
+                                break;
+
+                            default:
+                                document.getElementById("dashboard").className = "nav-link active";
+                        }
+                </script>
+            </text>
+        }
+    }
 </body>
+
 
 </html>

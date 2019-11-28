@@ -17,6 +17,11 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="assets/css/Login-Form-Dark.css">
+    <style>
+        html,body{
+    height: 100% !important;
+}
+    </style>
 </head>
 
 <body style="padding-bottom: 0px !important;">
@@ -29,7 +34,7 @@
                     <li class="nav-item mx-0 mx-lg-1" role="presentation"><a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="~/rent">Huur auto</a></li>
                     @if (User.IsInRole("Admin") || User.IsInRole("Medewerkers"))
                     {
-                        <li class="nav-item mx-0 mx-lg-1" role="presentation"><a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger"   href="~/management">Management&nbsp&nbsp</a></li>
+                        <li class="nav-item mx-0 mx-lg-1" role="presentation"><a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger"   href="~/admin">Dashboard&nbsp&nbsp</a></li>
                     }
                 </ul>
                 @Html.Partial("_LoginPartial")
@@ -45,7 +50,7 @@
                     }
                     else
                     {
-                        <a href="/mijnautos/">
+                        <a href="/shoppingcard/">
                             <div class="text-white"><h4 style="font-size: 25px;" class="fas fa-car text-white"></h4>&nbsp0</div>
                         </a>
                     }
@@ -55,14 +60,10 @@
     </nav>
 
     @*Body*@
-    <div id="page-top">
+    <div id="page-top" style="height: 100% !important">
         @RenderBody()
     </div>
 
-    @*Footer*@
-    <div class="copyright py-4 text-center text-white" style="background-color: #283655 !important;">
-        <div class=""><small>Copyright ©&nbsp;Rent a Car @DateTime.Now.Year</small></div>
-    </div>
 
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")

@@ -1,0 +1,198 @@
+﻿@model IEnumerable<Rent_a_Car.Models.Verhuring>
+
+@{
+    ViewBag.Title = "Index";
+
+    if (User.IsInRole("Admin") || User.IsInRole("Medewerker"))
+    {
+        Layout = "~/Views/Shared/_layoutAdmin.cshtml";
+    }
+    else
+    {
+        <style>
+            .card a {
+                color: black !important;
+            }
+        </style>
+    }
+
+
+
+}
+
+
+<div class="container" style="padding-top: 100px; padding-bottom: 100px;">
+    <div class="card shadow">
+        <div class=" card-body">
+            <h2>Verhuringen</h2>
+            <table id="verhuringen" class="table table-striped table-bordered responsive nowrap" width="100%">
+                <thead>
+                    <tr>
+
+                        <th>
+                            Naam
+                        </th>
+
+                        <th>
+                            @Html.DisplayNameFor(model => model.StartDatum)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.EindDatum)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Prijs)
+                        </th>
+                        <th>
+                            Status
+                        </th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+
+                            <td>
+                                @item.AspNetUsers.Voornaam @item.AspNetUsers.Tussenvoegsel @item.AspNetUsers.Achternaam
+                            </td>
+
+                            <td>
+                                @item.StartDatum.ToString("dd-MM-yyyy")
+                            </td>
+                            <td>
+                                @item.EindDatum.ToString("dd-MM-yyyy")
+                            </td>
+                            <td>
+                                @String.Format("{0:C}", item.Prijs)
+                            </td>
+                            <td>
+                                @{
+                                    if (item.Geldig == false)
+                                    {
+                                        <span>Geanuleerd</span>
+                                    }
+                                    else if (DateTime.Now >= item.StartDatum && DateTime.Now <= item.EindDatum)
+                                    {
+                                        <span>Bezig</span>
+                                    }
+                                    else if (DateTime.Now > item.EindDatum)
+                                    {
+                                        <span>Verlopen</span>
+                                    }
+                                    else if (DateTime.Now < item.StartDatum)
+                                    {
+                                        <span>Aankomende</span>
+                                    }
+
+                                }
+                            </td>
+
+                            <td>
+                                @Html.ActionLink("Details", "Details", new { id = item.ID })
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+
+
+
+            </table>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    @Scripts.Render("~/bundles/jquery")
+
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/bs4/jszip-2.5.0/dt-1.10.20/b-1.6.1/b-colvis-1.6.1/b-html5-1.6.1/b-print-1.6.1/r-2.2.3/datatables.min.css" />
+
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.36/pdfmake.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.36/vfs_fonts.js"></script>
+    <script type="text/javascript" src="https://cdn.datatables.net/v/bs4/jszip-2.5.0/dt-1.10.20/b-1.6.1/b-colvis-1.6.1/b-html5-1.6.1/b-print-1.6.1/r-2.2.3/datatables.min.js"></script>
+
+    <script>
+        $(document).ready(function () {
+
+            $('#verhuringen').DataTable({
+                dom: 'Bfrtlip',
+                searching: true,
+                paging: true,
+                responsive: true,
+                buttons:
+                    [{
+                        extend: 'collection',
+                        text: 'Export',
+                        buttons: [
+                            {
+                                text: 'Print Table',
+                                extend: 'print',
+
+                            },
+                            {
+                                text: 'Copy Table',
+                                extend: 'copy',
+
+                            },
+                            {
+                                text: 'Download Excel',
+                                extend: 'excel',
+
+                            }
+                            ,
+                            {
+                                text: 'Download PDF',
+                                extend: 'pdf',
+
+                            }
+                        ]
+                    }, {
+                        text: 'Laat Aankomende zien',
+                        className: 'btn',
+                        action: function (e, dt, node, config) {
+                            if (dt.column(4).search() === '') {
+                                this.text('Laat alles zien');
+                                dt.column(4).search('Aankomende').draw(false);
+                            } else {
+                                this.text('Laat Aankomende zien');
+                                dt.column(4).search('').draw(true);
+                            }
+                        }
+                    }
+
+                    ],
+                language: {
+                    "sProcessing": "Bezig...",
+                    "sLengthMenu": "_MENU_ resultaten weergeven",
+                    "sZeroRecords": "Geen resultaten gevonden",
+                    "sInfo": "_START_ tot _END_ van _TOTAL_ resultaten",
+                    "sInfoEmpty": "Geen resultaten om weer te geven",
+                    "sInfoFiltered": " (gefilterd uit _MAX_ resultaten)",
+                    "sInfoPostFix": "",
+                    "sSearch": "Zoeken:",
+                    "sEmptyTable": "Geen resultaten aanwezig in de tabel",
+                    "sInfoThousands": ".",
+                    "sLoadingRecords": "Een moment geduld aub - bezig met laden...",
+                    "oPaginate": {
+                        "sFirst": "Eerste",
+                        "sLast": "Laatste",
+                        "sNext": "Volgende",
+                        "sPrevious": "Vorige"
+                    },
+                    "oAria": {
+                        "sSortAscending": ": activeer om kolom oplopend te sorteren",
+                        "sSortDescending": ": activeer om kolom aflopend te sorteren"
+                    }
+                }
+
+
+            });
+        });
+    </script>
+}
+
+
+
+
+

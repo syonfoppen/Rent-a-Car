@@ -31,7 +31,8 @@
 </style>
 
 <div class="login-dark text-white" style="color: white !important; height:90vh;">
-    <form method="post" action="/Account/Login" role="form">
+    @using (Html.BeginForm("Login", "Account", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { role = "form" }))
+    {
         @Html.AntiForgeryToken()
         <h2 class="sr-only">Login Form</h2>
         <div class="illustration">
@@ -48,12 +49,16 @@
             @Html.PasswordFor(m => m.Password, new { @class = "form-control" })
             @Html.ValidationMessageFor(m => m.Password, "", new { @class = "text-danger" })
         </div>
+
+            @Html.CheckBoxFor(m => m.RememberMe)
+            <span>Onthoud Mij</span>
+
         <div class="form-group">
             <button class="btn btn-primary btn-block" type="submit">Log In</button>
         </div>
         <a style="color: white !important;" class="forgot" href="#">Forgot your email or password?</a>
         <a style="color: white !important;" class="forgot" href="~//">Back to home</a>
-    </form>
+    }
 </div>
 
 @Scripts.Render("~/bundles/jquery")

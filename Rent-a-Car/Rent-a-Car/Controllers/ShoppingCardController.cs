@@ -9,6 +9,7 @@ using Microsoft.AspNet.Identity;
 namespace Rent_a_Car.Controllers
 {
     [Authorize]
+
     public class ShoppingCardController : Controller
     {
         private Entities db = new Entities();
@@ -16,7 +17,6 @@ namespace Rent_a_Car.Controllers
 
 
         // GET: ShoppingCard
-        [Route("MijnAutos")]
         public ActionResult Index()
         {
             Dictionary<AutoType, int> filteredautoTypes = null;
@@ -48,10 +48,6 @@ namespace Rent_a_Car.Controllers
                     //kijk of de eind datum niet eerder is dan de begin datum
                     if (begindatum < eindatum)
                     {
-
-
-
-
                         List<Auto> gesleceteerdeautos = new List<Auto>();
                         decimal prijs = 0;
                         TimeSpan verhuringlengte = eindatum - begindatum;
@@ -62,7 +58,6 @@ namespace Rent_a_Car.Controllers
                             foreach (AutoType item in autoTypeslist)
                             {
                                 //breken de prijs van de huring
-                                prijs += (decimal)db.spGetAutoPrice(begindatum, item.ID).First() * verhuringlengte.Days;
                                 foreach (var auto in item.Auto)
                                 {
                                     //kijk of de auto beschikbaar is zo ja voeg deze toe aan de lijst van autos
@@ -86,6 +81,10 @@ namespace Rent_a_Car.Controllers
                                 foreach (var item in gesleceteerdeautos)
                                 {
                                     gesleceteerdeautosReal.Add(db.Auto.Find(item.AutoID));
+                                }
+                                foreach (var item in filteredautoTypes.Keys)
+                                {
+                                    prijs += (decimal)db.spGetAutoPrice(begindatum, item.ID).First() * verhuringlengte.Days;
                                 }
 
                                 //maak een nieuwe verhuring aan
@@ -139,7 +138,7 @@ namespace Rent_a_Car.Controllers
                 autoTypeslist.Add(auto);
                 Session["ShoppingCard"] = autoTypeslist;
             }
-            return Redirect(Request.UrlReferrer.ToString());
+            return RedirectToAction("Index");
         }
         public ActionResult RemoveFromCard(int? id)
         {
