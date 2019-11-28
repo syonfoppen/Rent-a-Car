@@ -187,6 +187,7 @@
     <Compile Include="Controllers\RentController.cs" />
     <Compile Include="Controllers\ShoppingCardController.cs" />
     <Compile Include="Controllers\ProfileController.cs" />
+    <Compile Include="Controllers\UserManagerController.cs" />
     <Compile Include="Controllers\ViewHiresController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -198,6 +199,18 @@
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\AdminViewModel.cs" />
+    <Compile Include="Models\AspNetRoles.cs">
+      <DependentUpon>DatabaseModels.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\AspNetUserClaims.cs">
+      <DependentUpon>DatabaseModels.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\AspNetUserLogins.cs">
+      <DependentUpon>DatabaseModels.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\AspNetUsers.cs">
+      <DependentUpon>DatabaseModels.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\Auto.cs">
       <DependentUpon>DatabaseModels.tt</DependentUpon>
     </Compile>
@@ -381,6 +394,9 @@
     <Content Include="Views\ViewHires\Index.cshtml" />
     <Content Include="Views\Shared\_layoutAdmin.cshtml" />
     <Content Include="Views\Admin\Index.cshtml" />
+    <Content Include="Views\UserManager\Details.cshtml" />
+    <Content Include="Views\UserManager\Edit.cshtml" />
+    <Content Include="Views\UserManager\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
