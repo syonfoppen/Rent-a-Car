@@ -1,5 +1,6 @@
 ﻿@model Rent_a_Car.Models.AspNetUsers
 
+
 @{
     ViewBag.Title = "Details";
      Layout = "~/Views/Shared/_layoutAdmin.cshtml";
@@ -44,6 +45,14 @@
                         </div>
                         <div class="col-6">
                             @DateTime.Parse(Model.Geboortedatum.ToString()).ToString("yyyy-dd-MM")
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-6">
+                            <b>Rol:</b>
+                        </div>
+                        <div class="col-6">
+                            @Model.AspNetRoles.First().Name
                         </div>
                     </div>
                 </div>
