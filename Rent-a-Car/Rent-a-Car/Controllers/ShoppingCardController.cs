@@ -100,8 +100,8 @@ namespace Rent_a_Car.Controllers
                                 db.Verhuring.Add(newVerhuring);
                                 db.SaveChanges();
                                 Session.Clear();
-                                ViewBag.Message = "Succes!!"; //MOET WORDEN VERANDERD
-                                return View();
+                                Session["Message"] = "Je verhuring is succesvol geplaatst!"; //MOET WORDEN VERANDERD
+                                return RedirectToAction("index", "MijnVerhuringen");
                             }
                         }
                         ViewBag.Message = "Uw winkelmandje is leeg!";
