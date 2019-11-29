@@ -86,7 +86,13 @@
                                 <div class="col-sm-4 label-column"><label class="col-form-label" for="repeat-pawssword-input-field" style="color: rgb(255,255,255);">Rol</label></div>
                                 <div class="col-sm-6 input-column">
                                     @Html.DropDownList("roleId", null, new { @class = "form-control" })
-
+                                </div>
+                            </div>
+                            <div class="form-row form-group">
+                                <div class="col-sm-4 label-column"><label class="col-form-label" for="repeat-pawssword-input-field" style="color: rgb(255,255,255);">Lockout</label></div>
+                                <div class="col-sm-6 input-column">
+                                    @Html.CheckBoxFor(m => m.Lockout, new { @class = "form-control" })
+                                    @Html.ValidationMessageFor(m => m.Lockout, "", new { @class = "text-danger" })
                                 </div>
                             </div>
                         </div>
