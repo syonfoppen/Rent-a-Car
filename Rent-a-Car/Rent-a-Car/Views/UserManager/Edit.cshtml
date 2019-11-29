@@ -42,7 +42,7 @@
                             <div class="form-row form-group">
                                 <div class="col-sm-4 label-column"><label class="col-form-label" for="name-input-field" style="color: rgb(255,255,255);">Voornaam</label></div>
                                 <div class="col-sm-6 input-column">
-                                    @Html.TextBoxFor(m => m.Voornaam, new { @class = "form-control"})
+                                    @Html.TextBoxFor(m => m.Voornaam, new { @class = "form-control" })
                                     @Html.ValidationMessageFor(m => m.Voornaam, "", new { @class = "text-danger" })
                                 </div>
                             </div>
@@ -56,21 +56,21 @@
                             <div class="form-row form-group">
                                 <div class="col-sm-4 label-column"><label class="col-form-label" for="pawssword-input-field" style="color: rgb(255,255,255);">Achternaam</label></div>
                                 <div class="col-sm-6 input-column">
-                                    @Html.TextBoxFor(m => m.Achternaam, new { @class = "form-control"})
+                                    @Html.TextBoxFor(m => m.Achternaam, new { @class = "form-control" })
                                     @Html.ValidationMessageFor(m => m.Achternaam, "", new { @class = "text-danger" })
                                 </div>
                             </div>
                             <div class="form-row form-group">
                                 <div class="col-sm-4 label-column"><label class="col-form-label" for="repeat-pawssword-input-field" style="color: rgb(255,255,255);">Geboortedatum</label></div>
                                 <div class="col-sm-6 input-column">
-                                    @Html.TextBoxFor(m => m.Geboortedatum, new { @class = "form-control", type = "date", @Value = @DateTime.Parse(Model.Geboortedatum.ToString()).ToString("yyyy-dd-MM")})
+                                    @Html.TextBoxFor(m => m.Geboortedatum, new { @class = "form-control", type = "date", @Value = @DateTime.Parse(Model.Geboortedatum.ToString()).ToString("yyyy-dd-MM") })
                                     @Html.ValidationMessageFor(m => m.Geboortedatum, "", new { @class = "text-danger", @type = "date" })
                                 </div>
                             </div>
                             <div class="form-row form-group">
                                 <div class="col-sm-4 label-column"><label class="col-form-label" for="repeat-pawssword-input-field" style="color: rgb(255,255,255);">Telefoonnummer</label></div>
                                 <div class="col-sm-6 input-column">
-                                    @Html.TextBoxFor(m => m.PhoneNumber, new { @class = "form-control"})
+                                    @Html.TextBoxFor(m => m.PhoneNumber, new { @class = "form-control" })
                                     @Html.ValidationMessageFor(m => m.PhoneNumber, "", new { @class = "text-danger" })
                                 </div>
                             </div>
@@ -79,6 +79,13 @@
                                 <div class="col-sm-6 input-column">
                                     @Html.TextBoxFor(m => m.Email, new { @class = "form-control" })
                                     @Html.ValidationMessageFor(m => m.Email, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                            <div class="form-row form-group">
+                                <div class="col-sm-4 label-column"><label class="col-form-label" for="repeat-pawssword-input-field" style="color: rgb(255,255,255);">Rol</label></div>
+                                <div class="col-sm-6 input-column">
+                                    @Html.DropDownList("roleId", null, new { @class = "form-control" })
+
                                 </div>
                             </div>
                         </div>

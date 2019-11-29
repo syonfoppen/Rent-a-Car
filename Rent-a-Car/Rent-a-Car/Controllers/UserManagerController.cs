@@ -6,6 +6,8 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
+using Microsoft.AspNet.Identity;
+using Microsoft.AspNet.Identity.Owin;
 using Rent_a_Car.Models;
 
 namespace Rent_a_Car.Controllers
@@ -14,6 +16,20 @@ namespace Rent_a_Car.Controllers
     public class UserManagerController : Controller
     {
         private Entities db = new Entities();
+
+        private ApplicationUserManager _userManager;
+
+        public ApplicationUserManager UserManager
+        {
+            get
+            {
+                return _userManager ?? HttpContext.GetOwinContext().GetUserManager<ApplicationUserManager>();
+            }
+            private set
+            {
+                _userManager = value;
+            }
+        }
 
         // GET: UserManager
         public ActionResult Index()
@@ -57,6 +73,9 @@ namespace Rent_a_Car.Controllers
             {
                 return HttpNotFound();
             }
+
+            ViewBag.RoleId = new SelectList(db.AspNetRoles, "Id", "Name", aspNetUsers.AspNetRoles.First().Id);
+
             return View(aspNetUsers);
         }
 
@@ -65,7 +84,7 @@ namespace Rent_a_Car.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,Voornaam,Tussenvoegsel,Achternaam,Geboortedatum,Straat,Huisnummer,Toevoeging,PostCode,Plaats,Provincie,Land,Email,EmailConfirmed,PhoneNumber,TwoFactorEnabled,UserName,Lockout")] AspNetUsers aspNetUsersData)
+        public ActionResult Edit([Bind(Include = "Id,Voornaam,Tussenvoegsel,Achternaam,Geboortedatum,Straat,Huisnummer,Toevoeging,PostCode,Plaats,Provincie,Land,Email,EmailConfirmed,PhoneNumber,TwoFactorEnabled,UserName,Lockout")] AspNetUsers aspNetUsersData, string RoleId)
         {
             if (ModelState.IsValid)
             {
@@ -99,6 +118,10 @@ namespace Rent_a_Car.Controllers
                 {
                     newAspNetUsers.LockoutEndDateUtc = null;
                 }
+
+                UserManager.RemoveFromRole(newAspNetUsers.Id, newAspNetUsers.AspNetRoles.First().Name);
+                UserManager.AddToRole(newAspNetUsers.Id, db.AspNetRoles.Find(RoleId).Name);
+
                 db.Entry(newAspNetUsers).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
