@@ -43,7 +43,7 @@ namespace Rent_a_Car.Controllers
                 //Maak een list voor de winkelwagen pagina zelf
                 filteredautoTypes = autoTypeslist.GroupBy(t => t.ID).ToDictionary(t => t.First(), y => y.Count());
                 //bekijk of de geselecteerde begin datum niet later is dan de datum van vandaag
-                if (begindatum > DateTime.Now)
+                if (begindatum >= DateTime.Now)
                 {
                     //kijk of de eind datum niet eerder is dan de begin datum
                     if (begindatum < eindatum)
