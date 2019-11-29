@@ -165,7 +165,7 @@
                                     <td>
                                         @foreach (var auto in item.Auto)
                                         {
-                                            <text>@auto.AutoType.Merk @auto.AutoType.Type - @auto.AutoType.Uitvoering / @auto.Kenteken</text>
+                                            <text>@auto.AutoType.Merk @auto.AutoType.Type - @auto.AutoType.Uitvoering / @auto.Kenteken</text><br />
                                         }
                                     </td>
                                     <td>
@@ -304,7 +304,7 @@
 
             $('[data-bs-chart]').each(function (index, elem) {
                 var chart = new Chart(elem, {
-                    "type": "line",
+                    "type": "bar",
                     "data": {
                         "labels": ["Jan",
                             "Feb",
@@ -326,7 +326,7 @@
                                         <text>"@Convert.ToInt32(item)",</text>
                                     }
                                 }
-                            ], "backgroundColor": "rgba(78, 115, 223, 0.05)", "borderColor": "rgba(78, 115, 223, 1)"
+                            ], "backgroundColor": "rgb(78,115,223, 0.8)", "borderColor": "rgba(78, 115, 223, 1)"
                         }
                         ]
                     }

@@ -27,9 +27,10 @@ namespace Rent_a_Car.Controllers
             {
                 earningsannual += item.Prijs;
             }
-            decimal total = 0;
+
             for (int i = 0; i < 12; i++)
             {
+                decimal total = 0;
                 foreach (var item in db.Verhuring.Where(t => t.EindDatum.Month == i))
                 {
                     total += item.Prijs;
