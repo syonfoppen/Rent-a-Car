@@ -18,12 +18,12 @@ namespace Rent_a_Car.Controllers
             decimal earningsmonth = 0;
             decimal earningsannual = 0;
             List<decimal> monthlyprovit = new List<decimal>();
-            int totalrentsyear = db.Verhuring.Where(t => t.EindDatum.Year == DateTime.Now.Year).Count();
-            foreach (var item in db.Verhuring.Where(t => t.EindDatum.Month == DateTime.Now.Month))
+            int totalrentsyear = db.Verhuring.Where(t => t.StartDatum.Year == DateTime.Now.Year).Count();
+            foreach (var item in db.Verhuring.Where(t => t.StartDatum.Month == DateTime.Now.Month))
             {
                 earningsmonth += item.Prijs;
             }
-            foreach (var item in db.Verhuring.Where(t => t.EindDatum.Year == DateTime.Now.Year))
+            foreach (var item in db.Verhuring.Where(t => t.StartDatum.Year == DateTime.Now.Year))
             {
                 earningsannual += item.Prijs;
             }
@@ -31,7 +31,7 @@ namespace Rent_a_Car.Controllers
             for (int i = 0; i < 12; i++)
             {
                 decimal total = 0;
-                foreach (var item in db.Verhuring.Where(t => t.EindDatum.Month == i))
+                foreach (var item in db.Verhuring.Where(t => t.StartDatum.Month == i).OrderBy(t => t.StartDatum.Month))
                 {
                     total += item.Prijs;
                 }
