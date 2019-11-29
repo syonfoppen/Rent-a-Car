@@ -12,7 +12,7 @@ table a{
 </style>
 
 <div class="container" style="margin-top: 100px; height: 71vh; color: black;">
-    <h2>Mijn Autos</h2>
+    <h2>Mijn Auto's</h2>
     @using (Html.BeginForm("Index", "ShoppingCard", FormMethod.Post, new { @class = "form-horizontal", id = "myForm", role = "form" }))
     {
         @Html.AntiForgeryToken()
@@ -57,7 +57,7 @@ table a{
         </table>
         <div style="padding-bottom: 20px; padding-top: 20px;">
             <button type="submit" class="btn btn-primary">Huur</button>
-            <a href="/shoppingcard/Emptycard" class="btn btn-danger" style="float: right;">Leeg Winkelmandje</a>
+            <a href="/shoppingcard/Emptycard" class="btn btn-danger" style="float: right;">Leeg lijst</a>
         </div>
     }
 
