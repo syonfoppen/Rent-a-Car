@@ -1,0 +1,47 @@
+﻿@model Rent_a_Car.Models.Brandstof
+
+@{
+    ViewBag.Title = "Edit";
+    Layout = "~/Views/Shared/_layoutAdmin.cshtml";
+}
+
+<style>
+style>
+    .offsetInput {
+        margin-left: 50px;
+    }
+
+    body {
+        background-color: #4d648d;
+    }
+</style>
+
+<div class="container">
+    <div class="row register-form" style="margin-top: 50px; background-color: #4d648d;">
+        <div class="col-md-8 col-xl-10 offset-md-2 offset-xl-1">
+            <form class="custom-form" style="background-color: #283655;color: rgb(255,255,255);" action="/Brandstof/Edit" method="post" enctype="multipart/form-data" role="form" novalidate="novalidate">
+                @Html.AntiForgeryToken()
+                <h1 style="color: rgb(255,255,255);">Edit Brandstof</h1>
+                <hr />
+                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                <div class="form-row" style="color: rgb(255,255,255);">
+                    <div class="col-xl-12 offset-xl-0" style="color: rgb(255,255,255);">
+                        <div id="persoonsgegevens">
+                            <div class="form-row form-group">
+                                <div class="col-sm-4 label-column"><label class="col-form-label" for="name-input-field" style="color: rgb(255,255,255);">Brandstof</label></div>
+                                <div class="col-sm-6 input-column">
+                                    @Html.EditorFor(model => model.BrandstofType, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.ValidationMessageFor(model => model.BrandstofType, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <hr>
+                @Html.HiddenFor(m => m.ID)
+                <input type="submit" value="Bewerk" class="btn btn-default submit-button" />
+            </form>
+        </div>
+    </div>
+</div>
+

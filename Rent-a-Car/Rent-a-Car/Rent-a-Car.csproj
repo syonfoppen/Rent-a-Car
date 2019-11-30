@@ -182,11 +182,13 @@
     <Compile Include="Controllers\AdminController.cs" />
     <Compile Include="Controllers\AutosController.cs" />
     <Compile Include="Controllers\AutoTypesController.cs" />
+    <Compile Include="Controllers\BrandstofController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\MijnVerhuringenController.cs" />
     <Compile Include="Controllers\ProfileController.cs" />
     <Compile Include="Controllers\RentController.cs" />
+    <Compile Include="Controllers\SchakelTypesController.cs" />
     <Compile Include="Controllers\ShoppingCardController.cs" />
     <Compile Include="Controllers\UserManagerController.cs" />
     <Compile Include="Global.asax.cs">
@@ -400,6 +402,14 @@
     <Content Include="Views\MijnVerhuringen\Index.cshtml" />
     <Content Include="Views\MijnVerhuringen\Print.cshtml" />
     <Content Include="Views\Shared\Info.cshtml" />
+    <Content Include="Views\Brandstof\Create.cshtml" />
+    <Content Include="Views\Brandstof\Edit.cshtml" />
+    <Content Include="Views\Brandstof\Index.cshtml" />
+    <Content Include="Views\SchakelTypes\Create.cshtml" />
+    <Content Include="Views\SchakelTypes\Delete.cshtml" />
+    <Content Include="Views\SchakelTypes\Details.cshtml" />
+    <Content Include="Views\SchakelTypes\Edit.cshtml" />
+    <Content Include="Views\SchakelTypes\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
