@@ -1,0 +1,89 @@
+Wie:
+Het bedrijf heet Rent a Car en is gevordert in Groningen.
+Het bedrijf heeft geen plannen om uit te berijden.
+
+
+
+Waarom:
+Uit hun onderzoek is gebleken dat mensen in steden steeds vaker autos huren i.p.v. kopen.
+Ze huren de auto voor de dag dat ze hem nodig hebben. 
+Dit is voor hun goedkoper en fleksiebeler dan openbaar vervoer.
+uit onderzoek van de klanten van Rent a Car is gebleken dat ze 20 procent van de tijd niet 
+hun type auto kregen maar eerder een grotere.
+En 5 procent van de tijd de auto nog niet klaar stond.
+Ze willen een nieuwe website voor hogere klanttevredenheid en meer automatisering.
+
+
+
+Wat:
+Een website met registratie.
+Je kunt niet huren als je niet ingelogd bent.
+Gegevens van accounts kunnen door hun gebruikers aangepast worden (B.v. adres).
+Klanten hebben een overzicht met hun gehuurde auto(s).
+Medewerkers hebben een overzicht van alle gehuurde autos.
+Er zijn 3 roles: klant/medewerker/admin.
+Account roles kunnen door een admin makelijk verandert worden omdat medewerkers vaak wisselen.
+Autotypes en autos kunnen makelijk toegevoegd/verwijdert worden door admins.
+De prijs van autos kan makkelijk verandert worden door admins.
+De oude prijzen worden opgeslagen.
+Meerdere auto's kunnen in een bestelling zitten.
+Een bestelling heeft maar een huur tijd.
+De site moet er zakelijk en profesioneel uitzien.
+De kleuren van de site zijn wit en blauw.
+Er is geen limiet voor de hoeveelheid auto's die geboekt kunnen worden, de duur van het huren of 
+hoe vroeg van te voren geboekt mag worden.
+Klanten kunnen van overal over de wereld komen.
+Daardoor moeten persoonlijke gegevens ook fleksiebel zijn.
+Het betalen gebeurt altijd bij het bedrijf aan het begin van de huurtijd
+Het vaktuur van de klant en de medewerker is hetzelfde.
+Alle auto's die die dag worden gehuurd, worden voor 7 uur s'ochtends klaargezet door de medewerkers.
+Het betalen moet vloeiend en met weinig stappen gaan.
+persoonlijke gegevens geschiedenis hoeft niet te worden opgeslagen.
+Een klant kan zijn huur geschiedenis zien (could).
+
+
+
+Hoe het werkt:
+Klant maakt een account.
+Klant logt in.
+Klant zoekt een of meerdere autotypes uit.
+Klant zoekt de begin en eind datum uit.
+Klant krijgt een vactuur voor de huur van auto(s) van zijn gekozen type.
+Medewerker zet de auto(s) klaar op de dag van het begin van de huur.
+Klant neemt dit vactuur mee naar het bedrijf op de dag van het begin van de huur.
+Medewerker print het vactuur uit.
+Klant en Medewerker vergelijken de vacturen.
+Medewerker kontroleert of klant 21+ is en een rijbewijs heeft.
+Zo ja, krijgt klant auto.
+
+
+
+Homepage heeft:
+Een grote text met 'Rent a Car' en zijn telefoon nummer erop.
+Dan de meest gevgraagde autos mooi opgesteld.
+Als laatste contact gegevens van het bedrijf.
+
+Auto heeft:
+Kenteken
+Merk
+Model
+Brandstof
+Zitplaatsen
+Kofferbak grote
+schakeltype
+Trekhaak
+Aantal deuren
+Gewicht van de auto
+Bauwjaar
+
+Medewerker kan:
+Zien welke autos klaargezet moeten worden.
+Vakturen uitdraaien.
+
+Vactuur heeft:
+Gegevens van de klant
+Gegevens van het bedrijf
+De datum van het begin en het einde van de huur.
+De Auto
+De Btw
+De Prijs
